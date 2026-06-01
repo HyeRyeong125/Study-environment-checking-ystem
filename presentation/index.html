@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>집중력 강화 시스템 - Concentration Enhancement System</title>
+
+    <!-- Reveal.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/black.css">
+
+    <!-- Custom CSS -->
+    <style>
+        .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+            text-transform: none;
+        }
+
+        .reveal {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .custom-title {
+            font-size: 3.5em;
+            color: #4DB8FF;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .custom-subtitle {
+            font-size: 1.5em;
+            color: #8DD7F7;
+        }
+
+        .slide-section {
+            margin-top: 30px;
+            padding: 20px;
+            border-left: 5px solid #4DB8FF;
+        }
+
+        .feature-box {
+            display: inline-block;
+            background: rgba(77, 184, 255, 0.1);
+            padding: 15px 25px;
+            margin: 10px;
+            border-radius: 8px;
+            border-left: 3px solid #4DB8FF;
+            text-align: left;
+        }
+
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .tech-item {
+            background: rgba(77, 184, 255, 0.1);
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 3px solid #4DB8FF;
+        }
+
+        .wbs-tree {
+            text-align: left;
+            font-size: 0.8em;
+            font-family: 'Courier New', monospace;
+            line-height: 1.8;
+        }
+
+        .wbs-level-1 { color: #FF6B6B; font-weight: bold; }
+        .wbs-level-2 { color: #4ECDC4; margin-left: 20px; }
+        .wbs-level-3 { color: #95E1D3; margin-left: 40px; }
+
+        .architecture-desc {
+            text-align: left;
+            font-size: 0.9em;
+            line-height: 1.8;
+        }
+
+        .vision-text {
+            font-size: 1.3em;
+            line-height: 1.6;
+            color: #8DD7F7;
+            margin: 20px 0;
+        }
+
+        table {
+            margin: auto;
+            border-collapse: collapse;
+            font-size: 0.8em;
+        }
+
+        table td, table th {
+            border: 1px solid #666;
+            padding: 10px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: rgba(77, 184, 255, 0.3);
+            color: #4DB8FF;
+        }
+
+        .timeline {
+            margin-top: 30px;
+        }
+
+        .milestone {
+            display: inline-block;
+            background: rgba(77, 184, 255, 0.2);
+            padding: 10px 15px;
+            margin: 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            font-size: 0.6em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Title Slide -->
+            <section>
+                <div class="custom-title">🎯 집중력 강화 시스템</div>
+                <div class="custom-subtitle">Concentration Enhancement System</div>
+                <p style="margin-top: 50px; font-size: 1.1em;">IoT 센서 기반 실시간 집중력 모니터링 및 환경 개선</p>
+                <p style="font-size: 0.9em; color: #999; margin-top: 50px;">2026</p>
+            </section>
+
+            <!-- Vision & Goals -->
+            <section>
+                <section>
+                    <h2>🌟 프로젝트 비전</h2>
+                    <div class="vision-text">
+                        <p><strong>목표:</strong> IoT 기술을 활용하여 사용자의 집중력 상태를 실시간으로 모니터링하고,<br/>
+                        AI 기반 자동 조언을 통해 최적의 작업 환경을 제공합니다.</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>핵심 가치</h3>
+                    <div class="feature-box">
+                        <strong>📊 실시간 모니터링</strong>
+                        <p>센서를 통한 즉각적인 집중력 데이터 수집</p>
+                    </div>
+                    <div class="feature-box">
+                        <strong>🤖 AI 기반 조언</strong>
+                        <p>EXAONE AI를 통한 개인화된 조언</p>
+                    </div>
+                    <div class="feature-box">
+                        <strong>🎮 사용자 경험</strong>
+                        <p>직관적인 대시보드와 통계 분석</p>
+                    </div>
+                    <div class="feature-box">
+                        <strong>⚡ 스마트 환경 제어</strong>
+                        <p>자동 조명 제어 및 환경 개선</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>기대 효과</h3>
+                    <ul>
+                        <li>✅ 집중력 향상 및 생산성 증대</li>
+                        <li>✅ 건강한 작업 환경 유지</li>
+                        <li>✅ 개인 맞춤형 조언 및 피드백</li>
+                        <li>✅ 집중력 패턴 분석 및 개선</li>
+                    </ul>
+                </section>
+            </section>
+
+            <!-- System Architecture -->
+            <section>
+                <section>
+                    <h2>🏗️ 시스템 아키텍처</h2>
+                    <p style="font-size: 0.9em; color: #999;">4-Layer Architecture</p>
+                </section>
+
+                <section>
+                    <h3>🔧 Hardware Layer (Arduino)</h3>
+                    <div class="architecture-desc">
+                        <p><strong>센서 구성:</strong></p>
+                        <ul>
+                            <li>📳 진동 센서 - 타이핑/사용 패턴 감지</li>
+                            <li>💡 조도 센서 - 실내 조명 및 수면 패턴</li>
+                            <li>📏 초음파 센서 - 자세 감지 및 거리 모니터링</li>
+                            <li>🔌 버튼/릴레이 - 조명 제어, 수동 조작</li>
+                        </ul>
+                        <p style="margin-top: 20px;"><strong>통신:</strong> MQTT / Serial → JSON 형식</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>⚙️ Backend Layer (Python)</h3>
+                    <div class="architecture-desc">
+                        <p><strong>주요 모듈:</strong></p>
+                        <ul>
+                            <li>📡 API 서버 - REST API 엔드포인트 제공</li>
+                            <li>🔄 센서 서비스 - 데이터 수집 및 처리</li>
+                            <li>📊 데이터 서비스 - 분석 및 통계</li>
+                            <li>🤖 AI 서비스 - EXAONE AI 통합</li>
+                            <li>📦 데이터 모델 - Sensor, User, Statistics</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>🎨 Frontend Layer (Web)</h3>
+                    <div class="architecture-desc">
+                        <p><strong>페이지 & 기능:</strong></p>
+                        <ul>
+                            <li>📊 Dashboard - 실시간 센서 데이터 모니터링</li>
+                            <li>📈 Stats - 집중 시간, 환경 통계 분석</li>
+                            <li>⚙️ Settings - 사용자 설정</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>기술:</strong></p>
+                        <ul>
+                            <li>Chart.js - 실시간 데이터 시각화</li>
+                            <li>MediaPipe - 포즈/얼굴 감지</li>
+                            <li>MediaDevices API - 웹캠 접근</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>💾 Database Layer</h3>
+                    <div class="architecture-desc">
+                        <table>
+                            <tr>
+                                <th>환경</th>
+                                <th>데이터베이스</th>
+                                <th>용도</th>
+                            </tr>
+                            <tr>
+                                <td>개발</td>
+                                <td>H2 (인메모리)</td>
+                                <td>자동 생성, 빠른 개발</td>
+                            </tr>
+                            <tr>
+                                <td>프로덕션</td>
+                                <td>MySQL</td>
+                                <td>안정적인 데이터 저장</td>
+                            </tr>
+                        </table>
+                        <p style="margin-top: 20px;"><strong>주요 테이블:</strong></p>
+                        <ul>
+                            <li>sensors - 센서 데이터</li>
+                            <li>users - 사용자 정보</li>
+                            <li>statistics - 통계 데이터</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>데이터 흐름</h3>
+                    <p style="font-size: 0.9em; line-height: 2;">
+                        <strong>Arduino</strong> 센서 데이터<br/>
+                        ↓ MQTT/Serial<br/>
+                        <strong>Python Backend</strong> 데이터 처리<br/>
+                        ↓ 저장 & 분석<br/>
+                        <strong>Database</strong> 데이터 보관<br/>
+                        ↓ REST API<br/>
+                        <strong>Web Frontend</strong> 실시간 대시보드<br/>
+                        ↓ 시각화<br/>
+                        <strong>사용자</strong> 모니터링 & 피드백
+                    </p>
+                </section>
+            </section>
+
+            <!-- WBS (Work Breakdown Structure) -->
+            <section>
+                <section>
+                    <h2>📋 WBS (작업 분해 구조)</h2>
+                    <p style="font-size: 0.9em; color: #999;">Work Breakdown Structure</p>
+                </section>
+
+                <section>
+                    <h3>프로젝트 구조</h3>
+                    <div class="wbs-tree">
+                        <div class="wbs-level-1">🎯 집중력 강화 시스템</div>
+
+                        <div class="wbs-level-2">├─ 1️⃣ Hardware Development (아두이노)</div>
+                        <div class="wbs-level-3">│  ├─ 센서 통합 (진동, 조도, 초음파)</div>
+                        <div class="wbs-level-3">│  ├─ 펌웨어 개발 및 테스트</div>
+                        <div class="wbs-level-3">│  ├─ 데이터 송신 (MQTT/Serial)</div>
+                        <div class="wbs-level-3">│  └─ 환경 제어 (조명, 릴레이)</div>
+
+                        <div class="wbs-level-2">├─ 2️⃣ Backend Development (Python)</div>
+                        <div class="wbs-level-3">│  ├─ API 서버 구축</div>
+                        <div class="wbs-level-3">│  ├─ 센서 데이터 처리 (sensor_service)</div>
+                        <div class="wbs-level-3">│  ├─ AI 통합 (EXAONE, ai_service)</div>
+                        <div class="wbs-level-3">│  ├─ 데이터 분석 (data_service)</div>
+                        <div class="wbs-level-3">│  └─ 데이터베이스 연동</div>
+
+                        <div class="wbs-level-2">├─ 3️⃣ Frontend Development (Web)</div>
+                        <div class="wbs-level-3">│  ├─ 대시보드 개발</div>
+                        <div class="wbs-level-3">│  ├─ 통계/분석 페이지</div>
+                        <div class="wbs-level-3">│  ├─ 사용자 설정 페이지</div>
+                        <div class="wbs-level-3">│  ├─ MediaPipe 포즈 감지</div>
+                        <div class="wbs-level-3">│  ├─ Chart.js 시각화</div>
+                        <div class="wbs-level-3">│  └─ 반응형 UI 디자인</div>
+
+                        <div class="wbs-level-2">├─ 4️⃣ Database Design</div>
+                        <div class="wbs-level-3">│  ├─ H2 개발 환경 구성</div>
+                        <div class="wbs-level-3">│  ├─ MySQL 프로덕션 구성</div>
+                        <div class="wbs-level-3">│  ├─ 스키마 설계 (sensors, users, statistics)</div>
+                        <div class="wbs-level-3">│  └─ 마이그레이션 전략</div>
+
+                        <div class="wbs-level-2">└─ 5️⃣ Integration & Testing</div>
+                        <div class="wbs-level-3">   ├─ 시스템 통합 테스트</div>
+                        <div class="wbs-level-3">   ├─ E2E 테스트</div>
+                        <div class="wbs-level-3">   ├─ 성능 테스트</div>
+                        <div class="wbs-level-3">   └─ 배포 및 모니터링</div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>프로젝트 일정</h3>
+                    <div class="timeline">
+                        <div class="milestone">Phase 1: 요구사항 분석 및 설계</div>
+                        <div class="milestone">Phase 2: Hardware 개발</div>
+                        <div class="milestone">Phase 3: Backend 개발</div>
+                        <div class="milestone">Phase 4: Frontend 개발</div>
+                        <div class="milestone">Phase 5: 통합 및 테스트</div>
+                        <div class="milestone">Phase 6: 배포 및 운영</div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Technology Stack -->
+            <section>
+                <section>
+                    <h2>🛠️ 기술 스택</h2>
+                </section>
+
+                <section>
+                    <h3>전체 기술 스택</h3>
+                    <div class="tech-stack">
+                        <div class="tech-item">
+                            <strong>🔧 Hardware</strong>
+                            <p>Arduino<br/>센서 (진동, 조도, 초음파)</p>
+                        </div>
+                        <div class="tech-item">
+                            <strong>⚙️ Backend</strong>
+                            <p>Python<br/>REST API<br/>EXAONE AI</p>
+                        </div>
+                        <div class="tech-item">
+                            <strong>🎨 Frontend</strong>
+                            <p>HTML / CSS<br/>Vanilla JavaScript<br/>Chart.js, MediaPipe</p>
+                        </div>
+                        <div class="tech-item">
+                            <strong>💾 Database</strong>
+                            <p>H2 (Dev)<br/>MySQL (Production)</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>외부 라이브러리 & API</h3>
+                    <ul>
+                        <li>📊 <strong>Chart.js</strong> - 실시간 데이터 시각화</li>
+                        <li>🎯 <strong>MediaPipe</strong> - AI 기반 포즈/얼굴 감지</li>
+                        <li>📹 <strong>MediaDevices API</strong> - 웹캠 접근</li>
+                        <li>🔌 <strong>MQTT</strong> - IoT 센서 통신</li>
+                        <li>🤖 <strong>EXAONE AI</strong> - 자연어 처리 및 조언</li>
+                        <li>🌐 <strong>Fetch API</strong> - 백엔드 통신</li>
+                    </ul>
+                </section>
+            </section>
+
+            <!-- Project Structure -->
+            <section>
+                <h2>📁 프로젝트 구조</h2>
+                <p style="text-align: left; font-size: 0.8em; font-family: monospace; line-height: 1.6;">
+                    project-root/<br/>
+                    ├── hardware/          # Arduino 펌웨어 및 센서<br/>
+                    ├── backend/           # Python 백엔드 서버<br/>
+                    │  ├── app/<br/>
+                    │  │  ├── api/        # API 엔드포인트<br/>
+                    │  │  ├── services/   # 비즈니스 로직<br/>
+                    │  │  ├── models/     # 데이터 모델<br/>
+                    │  │  └── config/     # 설정<br/>
+                    │  └── main.py<br/>
+                    ├── frontend/          # 웹 프론트엔드<br/>
+                    │  ├── src/<br/>
+                    │  │  ├── pages/      # HTML 페이지<br/>
+                    │  │  ├── css/        # 스타일<br/>
+                    │  │  └── js/         # JavaScript<br/>
+                    ├── database/          # DB 스키마 (H2, MySQL)<br/>
+                    └── docs/              # 프로젝트 문서
+                </p>
+            </section>
+
+            <!-- Deployment -->
+            <section>
+                <h2>🚀 배포 및 운영</h2>
+                <p style="margin-top: 30px;"><strong>개발 환경</strong></p>
+                <ul style="font-size: 0.9em;">
+                    <li>Arduino: 로컬 테스트</li>
+                    <li>Backend: Python localhost:5000</li>
+                    <li>Frontend: http-server localhost:8000</li>
+                    <li>Database: H2 (자동 생성)</li>
+                </ul>
+                <p style="margin-top: 30px;"><strong>프로덕션 환경</strong></p>
+                <ul style="font-size: 0.9em;">
+                    <li>Hardware: 실제 배포 장치</li>
+                    <li>Backend: 프로덕션 서버</li>
+                    <li>Frontend: CDN / 웹 서버</li>
+                    <li>Database: MySQL (안정적 저장)</li>
+                </ul>
+            </section>
+
+            <!-- Conclusion -->
+            <section>
+                <h2>✨ 결론</h2>
+                <div class="feature-box" style="margin: 30px auto; max-width: 600px;">
+                    <p style="font-size: 1.2em; margin: 0;">
+                        IoT와 AI를 결합하여 사용자의 집중력을 과학적으로 분석하고,<br/>
+                        개인화된 조언을 통해 최적의 작업 환경을 제공합니다.
+                    </p>
+                </div>
+                <p style="margin-top: 50px; font-size: 0.9em; color: #999;">
+                    더 많은 정보는 GitHub 저장소를 참고하세요.
+                </p>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Reveal.js Script -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            transition: 'slide',
+            transitionSpeed: 'default',
+            controls: true,
+            progress: true,
+            center: true,
+            slideNumber: true,
+            overview: true,
+            touch: true,
+            keyboard: true
+        });
+    </script>
+</body>
+</html>
