@@ -7,17 +7,28 @@
 
     <!-- Reveal.js CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/black.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/white.css">
 
     <!-- Custom CSS -->
     <style>
-        .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
-            text-transform: none;
-            margin: 5px 0 !important;
+        * {
+            box-sizing: border-box;
         }
 
         .reveal {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+        }
+
+        .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+            text-transform: none;
+            margin: 5px 0 !important;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+
+        .reveal section {
+            background: transparent !important;
         }
 
         .reveal section {
@@ -27,56 +38,73 @@
         }
 
         .custom-title {
-            font-size: 1.9em;
-            color: #4DB8FF;
-            margin-bottom: 3px !important;
+            font-size: 2.2em;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px !important;
             margin-top: 0 !important;
-            font-weight: bold;
+            font-weight: 800;
             line-height: 1.1;
+            letter-spacing: 0.5px;
         }
 
         .custom-subtitle {
-            font-size: 0.85em;
-            color: #8DD7F7;
+            font-size: 1.1em;
+            color: #55198b;
             margin: 0 !important;
             line-height: 1.1;
+            font-weight: 500;
         }
 
         .slide-section {
-            margin-top: 3px !important;
-            margin-bottom: 0 !important;
-            padding: 3px !important;
-            border-left: 3px solid #4DB8FF;
+            margin-top: 5px !important;
+            margin-bottom: 5px !important;
+            padding: 8px !important;
+            border-left: 4px solid #667eea;
+            background: linear-gradient(90deg, rgba(102, 126, 234, 0.05) 0%, transparent 100%);
+            border-radius: 4px;
         }
 
         .feature-box {
             display: inline-block;
-            background: rgba(77, 184, 255, 0.1);
-            padding: 3px 6px;
-            margin: 2px 1px;
-            border-radius: 4px;
-            border-left: 2px solid #4DB8FF;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            padding: 6px 10px;
+            margin: 4px 3px;
+            border-radius: 8px;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-left: 3px solid #667eea;
             text-align: left;
-            font-size: 0.65em;
-            line-height: 1.1;
+            font-size: 0.7em;
+            line-height: 1.2;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
         }
 
         .tech-stack {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 3px;
-            margin-top: 2px !important;
+            gap: 8px;
+            margin-top: 5px !important;
             margin-bottom: 0 !important;
         }
 
         .tech-item {
-            background: rgba(77, 184, 255, 0.1);
-            padding: 3px;
-            border-radius: 3px;
-            border-left: 2px solid #4DB8FF;
-            font-size: 0.65em;
+            background: linear-gradient(135deg, #f8fbff 0%, #f0f5ff 100%);
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #e0e8ff;
+            border-left: 3px solid #667eea;
+            font-size: 0.7em;
             margin: 0 !important;
-            line-height: 1.1;
+            line-height: 1.2;
+            box-shadow: 0 1px 3px rgba(102, 126, 234, 0.1);
         }
 
         .wbs-tree {
@@ -87,56 +115,92 @@
             margin: 0 !important;
         }
 
-        .wbs-level-1 { color: #FF6B6B; font-weight: bold; }
-        .wbs-level-2 { color: #4ECDC4; margin-left: 6px; }
-        .wbs-level-3 { color: #95E1D3; margin-left: 12px; }
+        .wbs-level-1 {
+            color: #667eea;
+            font-weight: 700;
+            text-shadow: 0 1px 2px rgba(102, 126, 234, 0.1);
+        }
+        .wbs-level-2 {
+            color: #764ba2;
+            margin-left: 8px;
+            font-weight: 600;
+        }
+        .wbs-level-3 {
+            color: #5a4a9a;
+            margin-left: 16px;
+        }
 
         .architecture-desc {
             text-align: left;
-            font-size: 0.65em;
-            line-height: 1.1;
+            font-size: 0.7em;
+            line-height: 1.3;
             margin: 0 !important;
+            color: #2c3e50;
         }
 
         .architecture-desc p {
-            margin: 1px 0 !important;
-            font-size: 0.65em;
+            margin: 3px 0 !important;
+            font-size: 0.7em;
+            font-weight: 600;
+            color: #667eea;
         }
 
         .architecture-desc ul {
-            margin: 0px 0 !important;
-            padding-left: 12px;
+            margin: 2px 0 !important;
+            padding-left: 16px;
         }
 
         .architecture-desc li {
-            margin: 0px 0 !important;
-            font-size: 0.65em;
-            line-height: 1.1;
+            margin: 2px 0 !important;
+            font-size: 0.7em;
+            line-height: 1.3;
+            color: #2c3e50;
+        }
+
+        .reveal strong {
+            color: #667eea;
+            font-weight: 700;
         }
 
         .vision-text {
-            font-size: 0.8em;
-            line-height: 1.2;
-            color: #8DD7F7;
-            margin: 2px 0 !important;
+            font-size: 0.85em;
+            line-height: 1.4;
+            color: #2c3e50;
+            margin: 5px 0 !important;
+            padding: 10px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+            border-radius: 6px;
+            border-left: 3px solid #667eea;
         }
 
         table {
             margin: auto !important;
             border-collapse: collapse;
-            font-size: 0.6em;
-            line-height: 1;
+            font-size: 0.65em;
+            line-height: 1.2;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
         }
 
         table td, table th {
-            border: 1px solid #666;
-            padding: 2px;
+            border: 1px solid #e0e8ff;
+            padding: 4px 6px;
             text-align: left;
         }
 
         table th {
-            background-color: rgba(77, 184, 255, 0.3);
-            color: #4DB8FF;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f8fbff;
+        }
+
+        table tr:hover {
+            background-color: #f0f5ff;
         }
 
         .timeline {
@@ -146,12 +210,15 @@
 
         .milestone {
             display: inline-block;
-            background: rgba(77, 184, 255, 0.2);
-            padding: 2px 4px;
-            margin: 1px;
-            border-radius: 3px;
-            font-size: 0.65em;
-            line-height: 1.1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4px 8px;
+            margin: 3px 2px;
+            border-radius: 20px;
+            font-size: 0.7em;
+            font-weight: 600;
+            line-height: 1.2;
+            box-shadow: 0 2px 6px rgba(102, 126, 234, 0.3);
         }
 
         .footer {
@@ -179,8 +246,7 @@
                 <section>
                     <h2>🌟 프로젝트 비전</h2>
                     <div class="vision-text">
-                        <p><strong>목표:</strong> IoT 기술을 활용하여 사용자의 집중력 상태를 실시간으로 모니터링하고,<br/>
-                        AI 기반 자동 조언을 통해 최적의 작업 환경을 제공합니다.</p>
+                        <p><strong>비전:</strong> 단순히 공부 시간을 기록하는 것을 넘어, 하드웨어 센서를 통해 조도, 자세, 소음, 활동량 등 실제 학습 환경을 이해하고 EXAONE AI가 이를 분석하여 학생이 가장 몰입할 수 있는 환경으로 스스로 조정해 나가도록 돕는 지능형 학습 동반자입니다.</p>
                     </div>
                 </section>
 
@@ -228,9 +294,8 @@
                         <p><strong>센서 구성:</strong></p>
                         <ul>
                             <li>📳 진동 센서 - 타이핑/사용 패턴 감지</li>
-                            <li>💡 조도 센서 - 실내 조명 및 수면 패턴</li>
+                            <li>💡 조도 센서 - 실내 조도 감지</li>
                             <li>📏 초음파 센서 - 자세 감지 및 거리 모니터링</li>
-                            <li>🔌 버튼/릴레이 - 조명 제어, 수동 조작</li>
                         </ul>
                         <p style="margin-top: 2px;"><strong>통신:</strong> MQTT / Serial → JSON 형식</p>
                     </div>
@@ -491,19 +556,39 @@
     </script>
 
     <style>
-        .reveal h1 { font-size: 1.6em; margin: 0 !important; line-height: 1.1; }
-        .reveal h2 { font-size: 1.2em; margin: 2px 0 !important; line-height: 1.1; }
-        .reveal h3 { font-size: 1em; margin: 1px 0 !important; line-height: 1.1; }
-        .reveal h4 { font-size: 0.85em; margin: 1px 0 !important; line-height: 1.1; }
-        .reveal p { font-size: 0.75em; margin: 2px 0 !important; line-height: 1.2; }
-        .reveal li { font-size: 0.7em; margin: 1px 0 !important; line-height: 1.1; }
-        .reveal ul { margin: 1px 0 !important; padding-left: 15px; }
-        .reveal ol { margin: 1px 0 !important; padding-left: 15px; }
-        .reveal strong { font-weight: 600; }
+        .reveal h1 { font-size: 1.8em; margin: 0 !important; line-height: 1.2; color: #2c3e50; }
+        .reveal h2 {
+            font-size: 1.4em;
+            margin: 3px 0 !important;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+        .reveal h3 {
+            font-size: 1.1em;
+            margin: 2px 0 !important;
+            line-height: 1.2;
+            color: #667eea;
+            font-weight: 700;
+        }
+        .reveal h4 { font-size: 0.95em; margin: 1px 0 !important; line-height: 1.1; color: #2c3e50; }
+        .reveal p { font-size: 0.8em; margin: 3px 0 !important; line-height: 1.3; color: #2c3e50; }
+        .reveal li { font-size: 0.75em; margin: 2px 0 !important; line-height: 1.2; color: #2c3e50; }
+        .reveal ul { margin: 2px 0 !important; padding-left: 20px; }
+        .reveal ol { margin: 2px 0 !important; padding-left: 20px; }
+        .reveal strong { font-weight: 700; color: #667eea; }
 
-        .timeline { margin: 1px 0 !important; }
-        .milestone { font-size: 0.6em; padding: 1px 3px !important; margin: 1px !important; }
-        .footer { font-size: 0.45em !important; bottom: 2px !important; }
+        .timeline { margin: 2px 0 !important; }
+        .milestone { font-size: 0.7em; font-weight: 600; }
+        .footer { font-size: 0.5em !important; bottom: 3px !important; color: #95a5a6; }
+
+        /* Slide transition effect */
+        .reveal .slides {
+            perspective: 1000px;
+        }
     </style>
 </body>
 </html>
