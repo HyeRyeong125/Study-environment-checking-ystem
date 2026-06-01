@@ -7,230 +7,215 @@
 
     <!-- Reveal.js CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/white.css">
 
-    <!-- Custom CSS -->
+    <!-- Custom CSS - Modern Clean Design -->
     <style>
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
 
+        html, body {
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            color: #333333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+
         .reveal {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
-            color: #1a1a1a !important;
-        }
-
-        body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
-            color: #1a1a1a !important;
-        }
-
-        .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
-            text-transform: none;
-            margin: 5px 0 !important;
-            color: #1a1a1a !important;
-            font-weight: 700 !important;
-            text-shadow: none !important;
+            background: #ffffff !important;
+            color: #333333 !important;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
         }
 
         .reveal section {
             background: transparent !important;
+            overflow: visible !important;
+            padding: 20px !important;
+            text-align: left;
         }
 
-        .reveal section {
-            overflow: hidden !important;
-            padding: 10px !important;
-            height: auto !important;
+        .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+            text-transform: none !important;
+            color: #001a4d !important;
+            margin: 0 !important;
+            font-weight: 700 !important;
+            text-shadow: none !important;
         }
 
+        .reveal h1 { font-size: 2.5em !important; margin-bottom: 10px !important; }
+        .reveal h2 { font-size: 2em !important; margin-bottom: 15px !important; }
+        .reveal h3 { font-size: 1.4em !important; margin-bottom: 10px !important; }
+        .reveal p { font-size: 1em !important; color: #555555 !important; margin: 5px 0 !important; line-height: 1.5 !important; }
+        .reveal li { font-size: 0.95em !important; color: #555555 !important; margin: 5px 0 !important; line-height: 1.5 !important; }
+        .reveal ul { margin: 5px 0 !important; padding-left: 25px !important; }
+        .reveal strong { color: #001a4d !important; font-weight: 700 !important; }
+
+        /* Custom Elements */
         .custom-title {
-            font-size: 2.2em;
-            color: #667eea;
-            margin-bottom: 5px !important;
-            margin-top: 0 !important;
-            font-weight: 800;
-            line-height: 1.1;
-            letter-spacing: 0.5px;
-            text-shadow: 0 2px 4px rgba(102, 126, 234, 0.1);
+            font-size: 2.8em !important;
+            font-weight: 800 !important;
+            color: #001a4d !important;
+            margin-bottom: 8px !important;
+            line-height: 1.2 !important;
+            text-shadow: none !important;
         }
 
         .custom-subtitle {
-            font-size: 1.1em;
-            color: #1a1a1a !important;
+            font-size: 1.2em !important;
+            color: #0052cc !important;
+            font-weight: 600 !important;
             margin: 0 !important;
-            line-height: 1.1;
-            font-weight: 500;
         }
 
-        .slide-section {
-            margin-top: 5px !important;
-            margin-bottom: 5px !important;
-            padding: 8px !important;
-            border-left: 4px solid #667eea;
-            background: linear-gradient(90deg, rgba(102, 126, 234, 0.05) 0%, transparent 100%);
-            border-radius: 4px;
+        /* Title with underline */
+        .title-with-underline {
+            border-bottom: 3px solid #0052cc !important;
+            padding-bottom: 12px !important;
+            margin-bottom: 15px !important;
         }
 
+        /* Left border quote style */
+        .quote-box {
+            border-left: 4px solid #0052cc !important;
+            padding-left: 15px !important;
+            margin: 15px 0 !important;
+            color: #666666 !important;
+            font-size: 0.95em !important;
+            line-height: 1.6 !important;
+        }
+
+        /* Feature boxes */
         .feature-box {
-            display: inline-block;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-            padding: 6px 10px;
-            margin: 4px 3px;
-            border-radius: 8px;
-            border: 1px solid rgba(102, 126, 234, 0.3);
-            border-left: 3px solid #667eea;
-            text-align: left;
-            font-size: 0.7em;
-            line-height: 1.2;
-            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
+            background: #f8f9ff !important;
+            border-left: 4px solid #0052cc !important;
+            padding: 10px 12px !important;
+            margin: 6px 0 !important;
+            border-radius: 4px !important;
+            display: inline-block !important;
+            margin-right: 8px !important;
+            font-size: 0.9em !important;
+            color: #333333 !important;
         }
 
-        .feature-box:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        .feature-box strong {
+            color: #001a4d !important;
         }
 
+        /* Tech stack items */
         .tech-stack {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
-            margin-top: 5px !important;
-            margin-bottom: 0 !important;
+            display: grid !important;
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 10px !important;
+            margin: 10px 0 !important;
         }
 
         .tech-item {
-            background: linear-gradient(135deg, #f8fbff 0%, #f0f5ff 100%);
-            padding: 8px;
-            border-radius: 6px;
-            border: 1px solid #e0e8ff;
-            border-left: 3px solid #667eea;
-            font-size: 0.7em;
-            margin: 0 !important;
-            line-height: 1.2;
-            box-shadow: 0 1px 3px rgba(102, 126, 234, 0.1);
+            background: #f0f4ff !important;
+            border-left: 3px solid #0052cc !important;
+            padding: 10px !important;
+            border-radius: 4px !important;
+            font-size: 0.9em !important;
+            color: #333333 !important;
         }
 
-        .wbs-tree {
-            text-align: left;
-            font-size: 0.55em;
-            font-family: 'Courier New', monospace;
-            line-height: 1.1;
-            margin: 0 !important;
-        }
-
-        .wbs-level-1 {
-            color: #667eea;
-            font-weight: 700;
-            text-shadow: 0 1px 2px rgba(102, 126, 234, 0.1);
-        }
-        .wbs-level-2 {
-            color: #764ba2;
-            margin-left: 8px;
-            font-weight: 600;
-        }
-        .wbs-level-3 {
-            color: #5a4a9a;
-            margin-left: 16px;
-        }
-
+        /* Architecture descriptions */
         .architecture-desc {
-            text-align: left;
-            font-size: 0.7em;
-            line-height: 1.3;
-            margin: 0 !important;
-            color: #1a1a1a !important;
+            color: #333333 !important;
+            font-size: 0.95em !important;
+            line-height: 1.6 !important;
         }
 
         .architecture-desc p {
-            margin: 3px 0 !important;
-            font-size: 0.7em;
-            font-weight: 600;
-            color: #1a1a1a !important;
+            margin: 8px 0 !important;
+            color: #001a4d !important;
+            font-weight: 600 !important;
         }
 
         .architecture-desc ul {
-            margin: 2px 0 !important;
-            padding-left: 16px;
+            margin: 5px 0 !important;
+            padding-left: 20px !important;
         }
 
         .architecture-desc li {
-            margin: 2px 0 !important;
-            font-size: 0.7em;
-            line-height: 1.3;
-            color: #1a1a1a !important;
+            color: #333333 !important;
+            margin: 3px 0 !important;
         }
 
-        .reveal strong {
-            color: #1a1a1a !important;
-            font-weight: 700;
+        /* WBS Tree */
+        .wbs-tree {
+            font-size: 0.85em !important;
+            font-family: 'Monaco', 'Menlo', monospace !important;
+            line-height: 1.4 !important;
+            color: #333333 !important;
+            overflow-x: auto !important;
         }
 
+        .wbs-level-1 { color: #001a4d !important; font-weight: 700 !important; }
+        .wbs-level-2 { color: #0052cc !important; margin-left: 15px !important; }
+        .wbs-level-3 { color: #555555 !important; margin-left: 30px !important; }
+
+        /* Vision text */
         .vision-text {
-            font-size: 0.85em;
-            line-height: 1.4;
-            color: #1a1a1a !important;
-            margin: 5px 0 !important;
-            padding: 10px;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
-            border-radius: 6px;
-            border-left: 3px solid #667eea;
+            border-left: 4px solid #0052cc !important;
+            padding-left: 15px !important;
+            color: #555555 !important;
+            font-size: 0.95em !important;
+            line-height: 1.6 !important;
+            margin: 10px 0 !important;
         }
 
+        /* Tables */
         table {
-            margin: auto !important;
-            border-collapse: collapse;
-            font-size: 0.65em;
-            line-height: 1.2;
-            border-radius: 6px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
-        }
-
-        table td, table th {
-            border: 1px solid #e0e8ff;
-            padding: 4px 6px;
-            text-align: left;
+            border-collapse: collapse !important;
+            width: 100% !important;
+            margin: 10px 0 !important;
+            font-size: 0.9em !important;
         }
 
         table th {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            font-weight: 600;
+            background: #001a4d !important;
+            color: white !important;
+            padding: 8px !important;
+            text-align: left !important;
+            font-weight: 600 !important;
+        }
+
+        table td {
+            border: 1px solid #e0e0e0 !important;
+            padding: 6px 8px !important;
+            color: #333333 !important;
         }
 
         table tr:nth-child(even) {
-            background-color: #f8fbff;
+            background: #f8f9ff !important;
         }
 
-        table tr:hover {
-            background-color: #f0f5ff;
-        }
-
+        /* Timeline milestones */
         .timeline {
-            margin-top: 3px !important;
-            margin-bottom: 0 !important;
+            margin: 10px 0 !important;
+            text-align: center !important;
         }
 
         .milestone {
-            display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 4px 8px;
-            margin: 3px 2px;
-            border-radius: 20px;
-            font-size: 0.7em;
-            font-weight: 600;
-            line-height: 1.2;
-            box-shadow: 0 2px 6px rgba(102, 126, 234, 0.3);
+            display: inline-block !important;
+            background: #0052cc !important;
+            color: white !important;
+            padding: 6px 14px !important;
+            margin: 4px !important;
+            border-radius: 20px !important;
+            font-size: 0.85em !important;
+            font-weight: 600 !important;
         }
 
+        /* Footer */
         .footer {
-            position: absolute;
-            bottom: 5px;
-            font-size: 0.5em;
-            color: #666;
+            text-align: center !important;
+            color: #999999 !important;
+            font-size: 0.8em !important;
+            margin-top: 20px !important;
         }
     </style>
 </head>
