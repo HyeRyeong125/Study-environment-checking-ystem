@@ -1,195 +1,56 @@
-# 집중력 강화 시스템 🎯
+# 🌿 EcoMind: AI 기반 스마트 학습 환경 최적화 시스템
+> **Arduino + FastAPI + EXAONE AI + Flutter**를 활용한 Full-Stack IoT 프로젝트입니다.
 
-IoT 센서 기반의 실시간 집중력 모니터링 및 환경 개선 시스템입니다.
+[![Platform](https://img.shields.io/badge/Platform-Flutter%20%7C%20Android%20%7C%20iOS-blue)](https://flutter.dev)
+[![Backend](https://img.shields.io/badge/Backend-FastAPI-green)](https://fastapi.tiangolo.com)
+[![AI](https://img.shields.io/badge/AI-LG%20EXAONE-orange)](https://www.lgresearch.ai/)
 
-> ⚡ **라이브 프레젠테이션**: [GitHub Pages에서 보기](#github-pages-배포)
+---
 
-## 🎯 프로젝트 비전
+## 🎬 📊 라이브 프레젠테이션
 
-사용자의 집중력 상태를 실시간으로 모니터링하고, AI 기반 자동 조언을 통해 최적의 작업 환경을 제공합니다.
+**[GitHub Pages에서 인터랙티브 프레젠테이션 보기 →](https://HyeRyeong125.github.io/Study-environment-checking-ystem/presentation/)**
 
-## 📁 프로젝트 구조
+프로젝트의 비전, 시스템 아키텍처, WBS(Work Breakdown Structure)를 포함한 완전한 프레젠테이션입니다.
 
-```
-project-root/
-├── presentation/          # 🎬 프레젠테이션 (GitHub Pages)
-│   ├── index.html        # Reveal.js 기반 인터랙티브 프레젠테이션
-│   └── README.md         # 프레젠테이션 가이드
-│
-├── hardware/              # 🔧 Arduino 펌웨어 및 센서
-│   ├── firmware/         # 메인 스케치
-│   ├── libraries/        # 외부 라이브러리
-│   └── docs/            # 하드웨어 문서
-│
-├── backend/              # ⚙️ Python 백엔드 서버
-│   ├── app/
-│   │   ├── api/         # API 엔드포인트
-│   │   ├── services/    # 비즈니스 로직
-│   │   ├── models/      # 데이터 모델
-│   │   └── config/      # 설정
-│   └── requirements.txt
-│
-├── frontend/             # 🎨 웹 프론트엔드
-│   ├── public/          # 정적 파일
-│   ├── src/
-│   │   ├── pages/       # HTML 페이지
-│   │   ├── css/         # 스타일시트
-│   │   └── js/          # JavaScript
-│   └── index.html
-│
-├── database/             # 💾 데이터베이스
-│   ├── h2/              # 개발용 (H2)
-│   └── mysql/           # 프로덕션 (MySQL)
-│
-├── docs/                # 📖 프로젝트 문서
-├── ARCHITECTURE.md      # 🏗️ 시스템 아키텍처 다이어그램
-└── _config.yml         # GitHub Pages 설정
-```
+**키보드 단축키:** Space/→(다음) ← (이전) | F(전체화면) | S(발표자 모드) | Esc(맵) | ?(도움말)
 
-## 🛠️ 기술 스택
+---
 
-| 계층 | 기술 |
-|------|------|
-| **Hardware** | Arduino, 진동/조도/초음파 센서 |
-| **Backend** | Python, REST API, EXAONE AI |
-| **Frontend** | HTML/CSS/JavaScript, Chart.js, MediaPipe |
-| **Database** | H2 (개발), MySQL (프로덕션) |
-| **Presentation** | Reveal.js, GitHub Pages |
+## 📝 Project Overview
+단순히 공부 시간을 기록하는 것을 넘어, **하드웨어 센서**로 실제 학습 환경(조도, 자세, 소음, 활동량)을 측정하고 **EXAONE AI**가 이를 분석하여 최적의 집중 환경을 가이드하는 지능형 학습 도우미입니다.
 
-## 🚀 빠른 시작
+## ✨ Key Features
+- **Real-time Monitoring:** 초음파/조도/진동 센서를 통한 학습 환경 데이터 수집
+- **AI Focus Guide:** EXAONE 기반의 맞춤형 자연어 피드백 제공 (자세 교정, 조명 권장 등)
+- **Focus Score:** 4가지 센서 데이터를 종합한 '집중 환경 점수(100pt)' 산출
+- **Pomodoro Mode:** 물리 버튼과 연동되는 스마트 뽀모도로 타이머 및 통계
+- **Posture Analysis:** 초음파 센서 거리 측정을 통한 거북목 방지 알림
 
-### 1. 저장소 클론
-```bash
-git clone https://github.com/HyeRyeong125/Study-environment-checking-ystem.git
-cd Study-environment-checking-ystem
-```
+## 🛠 Tech Stack
+### Hardware
+- **Controller:** Arduino Uno / ESP32
+- **Sensors:** Ultrasonic(HC-SR04), Photoresistor(LDR), Vibration(SW-420)
 
-### 2. 각 컴포넌트 설정
+### Backend & AI
+- **Language:** Python 3.10+
+- **Framework:** FastAPI
+- **AI Model:** LG EXAONE (via API/Local)
+- **Database:** PostgreSQL (Log Data), Redis (Real-time State)
 
-#### 하드웨어
-```bash
-# Arduino IDE에서 firmware/main.ino 파일 열기
-# 필요한 라이브러리 설치 후 업로드
-```
+### Mobile
+- **Framework:** Flutter
+- **State Management:** GetX
+- **Communication:** MQTT / REST API
 
-#### 백엔드
-```bash
-cd backend
-pip install -r requirements.txt
-python main.py
-```
-
-#### 프론트엔드
-```bash
-cd frontend
-python -m http.server 8000
-# 또는
-npx http-server
-```
-
-#### 프레젠테이션 (로컬)
-```bash
-cd presentation
-python -m http.server 8000
-# http://localhost:8000 접속
-```
-
-## 📊 GitHub Pages 배포
-
-### 1단계: GitHub 저장소 생성
-1. [GitHub](https://github.com/new)에서 새 저장소 생성
-2. 저장소 이름: `concentration-system` (또는 원하는 이름)
-3. Public으로 설정
-
-### 2단계: GitHub에 푸시 (이미 연결됨)
-```bash
-# 변경사항이 있으면 추가 커밋 후 푸시
-git add .
-git commit -m "Add: Project updates"
-git push origin main
-```
-
-### 3단계: GitHub Pages 활성화
-1. GitHub 저장소 → **Settings**
-2. 왼쪽 메뉴에서 **Pages** 클릭
-3. **Source** 설정:
-   - Branch: `main`
-   - Folder: `/ (root)`
-4. **Save** 클릭
-
-### 4단계: 프레젠테이션 접속 🎉
-```
-https://HyeRyeong125.github.io/Study-environment-checking-ystem/presentation/
-```
-
-## 📋 프레젠테이션 내용
-
-프레젠테이션은 다음 항목들을 포함합니다:
-
-### 1️⃣ 프로젝트 비전 (Vision & Goals)
-- 프로젝트 개요
-- 핵심 가치
-- 기대 효과
-
-### 2️⃣ 시스템 아키텍처 (Architecture)
-- Hardware 계층 (Arduino 센서)
-- Backend 계층 (Python API)
-- Frontend 계층 (Web UI)
-- Database 계층 (H2/MySQL)
-- 데이터 흐름
-
-### 3️⃣ WBS (Work Breakdown Structure)
-- 상세 작업 목록
-- 프로젝트 일정
-- Phase별 마일스톤
-
-### 4️⃣ 기술 스택 및 배포
-
-## 🎮 프레젠테이션 사용법
-
-### 키보드 단축키
-| 키 | 기능 |
-|----|------|
-| **Space / →** | 다음 슬라이드 |
-| **← / ↑** | 이전 슬라이드 |
-| **F** | 전체화면 |
-| **S** | 발표자 보기 |
-| **Esc** | 슬라이드 맵 |
-| **?** | 도움말 |
-
-### 프레젠테이션 커스터마이징
-`presentation/index.html` 파일을 수정하여:
-- 색상 변경 (CSS `<style>` 섹션)
-- 슬라이드 추가/수정
-- 테마 변경 (Reveal.js 테마)
-
-자세한 내용은 [프레젠테이션 README](./presentation/README.md) 참고
-
-## 📖 추가 문서
-
-- [프로젝트 아키텍처](./ARCHITECTURE.md) - Mermaid 다이어그램 포함
-- [하드웨어 설정](./hardware/README.md)
-- [백엔드 설정](./backend/README.md)
-- [프론트엔드 설정](./frontend/README.md)
-- [데이터베이스 구성](./database/README.md)
-- [프레젠테이션 가이드](./presentation/README.md)
-
-## 📝 라이센스
-
-이 프로젝트는 MIT 라이센스를 따릅니다.
-
-## 👨‍💻 기여
-
-이 프로젝트에 기여하려면:
-
-1. 저장소를 포크합니다.
-2. Feature 브랜치를 생성합니다. (`git checkout -b feature/AmazingFeature`)
-3. 변경 사항을 커밋합니다. (`git commit -m 'Add some AmazingFeature'`)
-4. 브랜치로 푸시합니다. (`git push origin feature/AmazingFeature`)
-5. Pull Request를 생성합니다.
-
-## 📞 연락
-
-- 이메일: cs012_c@ainuri.kr
-- GitHub Issues: [프로젝트 이슈](https://github.com/HyeRyeong125/Study-environment-checking-ystem/issues)
-- 프레젠테이션: [GitHub Pages](https://HyeRyeong125.github.io/Study-environment-checking-ystem/presentation/)
+## 🏗 System Architecture
+```mermaid
+graph TD
+    A[Arduino Sensors] -->|Serial/MQTT| B[Python Gateway]
+    B --> C[FastAPI Server]
+    C --> D[(PostgreSQL)]
+    C --> E[EXAONE AI Model]
+    E -->|Analysis| C
+    C --> F[Flutter Mobile App]
+    F -->|Control| C
+    C -->|Command| A
