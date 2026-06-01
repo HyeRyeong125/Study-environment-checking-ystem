@@ -60,8 +60,8 @@ project-root/
 
 ### 1. 저장소 클론
 ```bash
-git clone https://github.com/yourusername/concentration-system.git
-cd concentration-system
+git clone https://github.com/HyeRyeong125/Study-environment-checking-ystem.git
+cd Study-environment-checking-ystem
 ```
 
 ### 2. 각 컴포넌트 설정
@@ -101,13 +101,12 @@ python -m http.server 8000
 2. 저장소 이름: `concentration-system` (또는 원하는 이름)
 3. Public으로 설정
 
-### 2단계: 로컬 저장소 연결
+### 2단계: GitHub에 푸시 (이미 연결됨)
 ```bash
-git remote add origin https://github.com/yourusername/concentration-system.git
-git branch -M main
+# 변경사항이 있으면 추가 커밋 후 푸시
 git add .
-git commit -m "Initial commit: Add presentation and project structure"
-git push -u origin main
+git commit -m "Add: Project updates"
+git push origin main
 ```
 
 ### 3단계: GitHub Pages 활성화
@@ -120,7 +119,7 @@ git push -u origin main
 
 ### 4단계: 프레젠테이션 접속 🎉
 ```
-https://yourusername.github.io/concentration-system/presentation/
+https://HyeRyeong125.github.io/Study-environment-checking-ystem/presentation/
 ```
 
 ## 📋 프레젠테이션 내용
@@ -192,4 +191,5 @@ https://yourusername.github.io/concentration-system/presentation/
 ## 📞 연락
 
 - 이메일: cs012_c@ainuri.kr
-- GitHub Issues: [프로젝트 이슈](https://github.com/yourusername/concentration-system/issues)
+- GitHub Issues: [프로젝트 이슈](https://github.com/HyeRyeong125/Study-environment-checking-ystem/issues)
+- 프레젠테이션: [GitHub Pages](https://HyeRyeong125.github.io/Study-environment-checking-ystem/presentation/)
