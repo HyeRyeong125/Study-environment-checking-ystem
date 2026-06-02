@@ -320,33 +320,43 @@
         }
 
         /* Phase Progress Styles */
+        .phases-container {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important;
+            gap: 12px !important;
+            margin: 0 !important;
+        }
+
         .phase-item {
-            margin: 20px 0 !important;
-            padding: 16px !important;
+            margin: 0 !important;
+            padding: 12px !important;
             background: #f8f9ff !important;
-            border-radius: 8px !important;
-            border-left: 4px solid #0052cc !important;
+            border-radius: 6px !important;
+            border-left: 3px solid #0052cc !important;
+            font-size: 0.95em !important;
         }
 
         .phase-header {
             display: flex !important;
             justify-content: space-between !important;
-            align-items: center !important;
-            margin-bottom: 12px !important;
+            align-items: flex-start !important;
+            margin-bottom: 6px !important;
+            gap: 6px !important;
         }
 
         .phase-title {
-            font-size: 1.3em !important;
+            font-size: 0.95em !important;
             font-weight: 700 !important;
             color: #001a4d !important;
         }
 
         .phase-status {
-            font-size: 1em !important;
+            font-size: 0.7em !important;
             font-weight: 600 !important;
-            padding: 4px 12px !important;
-            border-radius: 20px !important;
+            padding: 2px 8px !important;
+            border-radius: 12px !important;
             white-space: nowrap !important;
+            flex-shrink: 0 !important;
         }
 
         .phase-status.completed {
@@ -366,10 +376,10 @@
 
         .progress-bar-container {
             background: #e9ecef !important;
-            border-radius: 20px !important;
+            border-radius: 12px !important;
             overflow: hidden !important;
-            height: 28px !important;
-            margin: 8px 0 !important;
+            height: 18px !important;
+            margin: 5px 0 !important;
             display: flex !important;
             align-items: center !important;
             position: relative !important;
@@ -377,13 +387,13 @@
 
         .progress-bar-fill {
             height: 100% !important;
-            border-radius: 20px !important;
+            border-radius: 12px !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
             color: white !important;
             font-weight: 600 !important;
-            font-size: 0.9em !important;
+            font-size: 0.7em !important;
         }
 
         .progress-bar-fill.completed {
@@ -399,21 +409,22 @@
         }
 
         .phase-description {
-            font-size: 1.15em !important;
+            font-size: 0.85em !important;
             color: #555555 !important;
-            line-height: 1.6 !important;
-            margin-top: 8px !important;
+            line-height: 1.3 !important;
+            margin-top: 5px !important;
         }
 
         .phase-description ul {
-            margin: 8px 0 !important;
-            padding-left: 20px !important;
+            margin: 3px 0 !important;
+            padding-left: 16px !important;
         }
 
         .phase-description li {
-            font-size: 1.1em !important;
+            font-size: 0.85em !important;
             color: #555555 !important;
-            margin: 4px 0 !important;
+            margin: 2px 0 !important;
+            list-style: disc !important;
         }
 
         /* Footer */
@@ -543,17 +554,14 @@
 
             <!-- WBS (Work Breakdown Structure) -->
             <section>
-                <section>
-                    <h2>📋 프로젝트 일정 (WBS)</h2>
-                    <p style="font-size: 0.9em; color: #999;">Work Breakdown Structure - Project Schedule</p>
-                </section>
+                <h2>📋 프로젝트 일정 (WBS)</h2>
+                <p style="font-size: 0.85em; color: #999; margin: 5px 0 10px 0;">Phase별 진행 현황</p>
 
-                <section>
-                    <h3>Phase별 진행 현황</h3>
-
+                <div class="phases-container">
+                    <!-- Phase 1 -->
                     <div class="phase-item">
                         <div class="phase-header">
-                            <span class="phase-title">✅ Phase 1: 요구사항 분석 및 설계</span>
+                            <span class="phase-title">✅ Phase 1: 설계</span>
                             <span class="phase-status completed">완료</span>
                         </div>
                         <div class="progress-bar-container">
@@ -561,17 +569,18 @@
                         </div>
                         <div class="phase-description">
                             <ul>
-                                <li>프로젝트 비전 및 목표 정의</li>
-                                <li>시스템 아키텍처 설계 (4계층)</li>
+                                <li>프로젝트 비전 정의</li>
+                                <li>아키텍처 설계</li>
                                 <li>기술 스택 선정</li>
-                                <li>일정 계획 및 리소스 할당</li>
+                                <li>일정 계획</li>
                             </ul>
                         </div>
                     </div>
 
+                    <!-- Phase 2 -->
                     <div class="phase-item">
                         <div class="phase-header">
-                            <span class="phase-title">✅ Phase 2: Frontend 개발</span>
+                            <span class="phase-title">✅ Phase 2: Frontend</span>
                             <span class="phase-status completed">완료</span>
                         </div>
                         <div class="progress-bar-container">
@@ -579,19 +588,18 @@
                         </div>
                         <div class="phase-description">
                             <ul>
-                                <li>대시보드 개발 (웹 기반)</li>
-                                <li>통계/분석 페이지 개발</li>
-                                <li>MediaPipe 포즈 감지 통합</li>
-                                <li>Chart.js 실시간 데이터 시각화</li>
-                                <li>사용자 설정 페이지</li>
-                                <li>반응형 UI 디자인</li>
+                                <li>대시보드 개발</li>
+                                <li>통계 분석 페이지</li>
+                                <li>MediaPipe 포즈 감지</li>
+                                <li>Chart.js 시각화</li>
                             </ul>
                         </div>
                     </div>
 
+                    <!-- Phase 3 -->
                     <div class="phase-item">
                         <div class="phase-header">
-                            <span class="phase-title">✅ Phase 3: Backend 개발</span>
+                            <span class="phase-title">✅ Phase 3: Backend</span>
                             <span class="phase-status completed">완료</span>
                         </div>
                         <div class="progress-bar-container">
@@ -599,43 +607,37 @@
                         </div>
                         <div class="phase-description">
                             <ul>
-                                <li>REST API 서버 구축 (FastAPI)</li>
-                                <li>센서 데이터 처리 (sensor_service)</li>
-                                <li>EXAONE AI 통합 (ai_service)</li>
-                                <li>데이터 분석 알고리즘 (data_service)</li>
-                                <li>데이터베이스 연동 및 ORM 설정</li>
-                                <li>API 문서화 및 테스트</li>
+                                <li>REST API 구축</li>
+                                <li>센서 데이터 처리</li>
+                                <li>EXAONE AI 통합</li>
+                                <li>데이터베이스 연동</li>
                             </ul>
                         </div>
                     </div>
-                </section>
 
-                <section>
-                    <h3>진행 예정 일정</h3>
-
+                    <!-- Phase 4 -->
                     <div class="phase-item">
                         <div class="phase-header">
-                            <span class="phase-title">🔄 Phase 4: Hardware 개발</span>
-                            <span class="phase-status in-progress">진행 중</span>
+                            <span class="phase-title">🔄 Phase 4: Hardware</span>
+                            <span class="phase-status in-progress">진행중</span>
                         </div>
                         <div class="progress-bar-container">
                             <div class="progress-bar-fill in-progress" style="width: 30%;">30%</div>
                         </div>
                         <div class="phase-description">
                             <ul>
-                                <li>Arduino 센서 통합 (진동, 조도, 초음파)</li>
-                                <li>펌웨어 개발 및 테스트</li>
-                                <li>센서 데이터 송신 (MQTT/Serial)</li>
-                                <li>환경 제어 시스템 (조명, 릴레이)</li>
-                                <li>통신 프로토콜 최적화</li>
-                                <li>하드웨어 안정화</li>
+                                <li>센서 통합</li>
+                                <li>펌웨어 개발</li>
+                                <li>데이터 송신</li>
+                                <li>환경 제어 시스템</li>
                             </ul>
                         </div>
                     </div>
 
+                    <!-- Phase 5 -->
                     <div class="phase-item">
                         <div class="phase-header">
-                            <span class="phase-title">⏳ Phase 5: 통합 및 테스트</span>
+                            <span class="phase-title">⏳ Phase 5: 통합 테스트</span>
                             <span class="phase-status pending">예정</span>
                         </div>
                         <div class="progress-bar-container">
@@ -643,18 +645,18 @@
                         </div>
                         <div class="phase-description">
                             <ul>
-                                <li>전체 시스템 통합</li>
-                                <li>E2E(End-to-End) 테스트</li>
-                                <li>성능 및 부하 테스트</li>
+                                <li>시스템 통합</li>
+                                <li>E2E 테스트</li>
+                                <li>성능 테스트</li>
                                 <li>보안 테스트</li>
-                                <li>사용자 승인 테스트 (UAT)</li>
                             </ul>
                         </div>
                     </div>
 
+                    <!-- Phase 6 -->
                     <div class="phase-item">
                         <div class="phase-header">
-                            <span class="phase-title">⏳ Phase 6: 배포 및 운영</span>
+                            <span class="phase-title">⏳ Phase 6: 배포</span>
                             <span class="phase-status pending">예정</span>
                         </div>
                         <div class="progress-bar-container">
@@ -663,14 +665,13 @@
                         <div class="phase-description">
                             <ul>
                                 <li>프로덕션 배포</li>
-                                <li>모니터링 시스템 구축</li>
-                                <li>사용자 교육 및 문서화</li>
-                                <li>지속적 운영 및 유지보수</li>
-                                <li>피드백 수집 및 개선</li>
+                                <li>모니터링 시스템</li>
+                                <li>사용자 교육</li>
+                                <li>운영 및 유지보수</li>
                             </ul>
                         </div>
                     </div>
-                </section>
+                </div>
             </section>
 
             <!-- Technology Stack -->
