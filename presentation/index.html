@@ -37,6 +37,11 @@
             text-align: left;
         }
 
+        .reveal section > h2,
+        .reveal section > h3 {
+            margin-bottom: 20px !important;
+        }
+
         .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
             text-transform: none !important;
             color: #001a4d !important;
@@ -48,8 +53,19 @@
         .reveal h1 { font-size: 3.8em !important; margin-bottom: 15px !important; }
         .reveal h2 { font-size: 3em !important; margin-bottom: 18px !important; }
         .reveal h3 { font-size: 2.1em !important; margin-bottom: 15px !important; }
-        .reveal p { font-size: 1.4em !important; color: #555555 !important; margin: 10px 0 !important; line-height: 1.7 !important; }
-        .reveal li { font-size: 1.35em !important; color: #555555 !important; margin: 8px 0 !important; line-height: 1.7 !important; }
+        .reveal p {
+            font-size: 1.4em !important;
+            color: #555555 !important;
+            margin: 14px 0 !important;
+            line-height: 1.8 !important;
+            padding: 8px 0 !important;
+        }
+        .reveal li {
+            font-size: 1.35em !important;
+            color: #555555 !important;
+            margin: 12px 0 !important;
+            line-height: 1.8 !important;
+        }
         .reveal ul { margin: 5px 0 !important; padding-left: 25px !important; }
         .reveal strong { color: #001a4d !important; font-weight: 700 !important; }
 
@@ -89,19 +105,28 @@
 
         /* Feature boxes */
         .feature-box {
-            background: #f8f9ff !important;
-            border-left: 4px solid #0052cc !important;
-            padding: 12px 14px !important;
-            margin: 8px 0 !important;
-            border-radius: 4px !important;
-            display: inline-block !important;
-            margin-right: 10px !important;
-            font-size: 1.05em !important;
+            background: #f0f4ff !important;
+            border-left: 5px solid #0052cc !important;
+            border-radius: 6px !important;
+            padding: 16px 18px !important;
+            margin: 12px 0 !important;
+            font-size: 1.1em !important;
             color: #333333 !important;
+            display: block !important;
+            box-shadow: 0 2px 8px rgba(0, 82, 204, 0.1) !important;
+            line-height: 1.7 !important;
         }
 
         .feature-box strong {
             color: #001a4d !important;
+            display: block !important;
+            margin-bottom: 6px !important;
+            font-size: 1.15em !important;
+        }
+
+        .feature-box p {
+            margin: 6px 0 !important;
+            font-size: 1.08em !important;
         }
 
         /* Tech stack items */
@@ -160,12 +185,19 @@
 
         /* Vision text */
         .vision-text {
-            border-left: 4px solid #0052cc !important;
-            padding-left: 18px !important;
+            background: #f0f4ff !important;
+            border-left: 5px solid #0052cc !important;
+            border-radius: 6px !important;
+            padding: 20px 24px !important;
             color: #555555 !important;
             font-size: 1.35em !important;
-            line-height: 1.8 !important;
-            margin: 15px 0 !important;
+            line-height: 1.9 !important;
+            margin: 18px 0 !important;
+            box-shadow: 0 2px 10px rgba(0, 82, 204, 0.12) !important;
+        }
+
+        .vision-text p {
+            margin: 0 !important;
         }
 
         /* Tables */
