@@ -171,6 +171,78 @@
             margin: 3px 0 !important;
         }
 
+        /* Architecture Layer Boxes */
+        .architecture-layers {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            gap: 14px !important;
+            margin: 20px 0 !important;
+            justify-content: space-between !important;
+        }
+
+        .layer-box {
+            background: linear-gradient(135deg, #f0f4ff 0%, #f8fbff 100%) !important;
+            border: 2px solid #0052cc !important;
+            border-radius: 8px !important;
+            padding: 18px !important;
+            flex: 1 !important;
+            min-width: 200px !important;
+            box-shadow: 0 4px 12px rgba(0, 82, 204, 0.15) !important;
+            text-align: center !important;
+        }
+
+        .layer-icon {
+            font-size: 3em !important;
+            margin-bottom: 8px !important;
+        }
+
+        .layer-title {
+            font-size: 1.4em !important;
+            font-weight: 700 !important;
+            color: #001a4d !important;
+            margin-bottom: 10px !important;
+        }
+
+        .layer-items {
+            text-align: left !important;
+            font-size: 1.1em !important;
+            color: #333333 !important;
+            line-height: 1.6 !important;
+        }
+
+        .layer-items li {
+            list-style: none !important;
+            margin: 5px 0 !important;
+            padding-left: 0 !important;
+        }
+
+        .layer-items li:before {
+            content: "▸ " !important;
+            color: #0052cc !important;
+            font-weight: bold !important;
+            margin-right: 6px !important;
+        }
+
+        /* Data Flow */
+        .data-flow {
+            background: #f8f9ff !important;
+            border: 2px dashed #0052cc !important;
+            border-radius: 8px !important;
+            padding: 18px !important;
+            margin: 20px 0 !important;
+            color: #333333 !important;
+            font-size: 1.3em !important;
+            line-height: 2 !important;
+            text-align: center !important;
+        }
+
+        .flow-arrow {
+            color: #0052cc !important;
+            font-weight: bold !important;
+            display: block !important;
+            margin: 8px 0 !important;
+        }
+
         /* WBS Tree - Keep small for project structure */
         .wbs-tree {
             font-size: 0.85em !important;
@@ -312,92 +384,63 @@
                 </section>
 
                 <section>
-                    <h3>🔧 Hardware Layer (Arduino)</h3>
-                    <div class="architecture-desc">
-                        <p><strong>센서 구성:</strong></p>
-                        <ul>
-                            <li>📳 진동 센서 - 타이핑/사용 패턴 감지</li>
-                            <li>💡 조도 센서 - 실내 조도 감지</li>
-                            <li>📏 초음파 센서 - 자세 감지 및 거리 모니터링</li>
-                        </ul>
-                        <p style="margin-top: 2px;"><strong>통신:</strong> MQTT / Serial → JSON 형식</p>
-                    </div>
-                </section>
-
-                <section>
-                    <h3>⚙️ Backend Layer (Python)</h3>
-                    <div class="architecture-desc">
-                        <p><strong>주요 모듈:</strong></p>
-                        <ul>
-                            <li>📡 API 서버 - REST API 엔드포인트 제공</li>
-                            <li>🔄 센서 서비스 - 데이터 수집 및 처리</li>
-                            <li>📊 데이터 서비스 - 분석 및 통계</li>
-                            <li>🤖 AI 서비스 - EXAONE AI 통합</li>
-                            <li>📦 데이터 모델 - Sensor, User, Statistics</li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section>
-                    <h3>🎨 Frontend Layer (Web)</h3>
-                    <div class="architecture-desc">
-                        <p><strong>페이지 & 기능:</strong></p>
-                        <ul>
-                            <li>📊 Dashboard - 실시간 센서 데이터 모니터링</li>
-                            <li>📈 Stats - 집중 시간, 환경 통계 분석</li>
-                            <li>⚙️ Settings - 사용자 설정</li>
-                        </ul>
-                        <p style="margin-top: 2px;"><strong>기술:</strong></p>
-                        <ul>
-                            <li>Chart.js - 실시간 데이터 시각화</li>
-                            <li>MediaPipe - 포즈/얼굴 감지</li>
-                            <li>MediaDevices API - 웹캠 접근</li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section>
-                    <h3>💾 Database Layer</h3>
-                    <div class="architecture-desc">
-                        <table>
-                            <tr>
-                                <th>환경</th>
-                                <th>데이터베이스</th>
-                                <th>용도</th>
-                            </tr>
-                            <tr>
-                                <td>개발</td>
-                                <td>H2 (인메모리)</td>
-                                <td>자동 생성, 빠른 개발</td>
-                            </tr>
-                            <tr>
-                                <td>프로덕션</td>
-                                <td>MySQL</td>
-                                <td>안정적인 데이터 저장</td>
-                            </tr>
-                        </table>
-                        <p style="margin-top: 2px;"><strong>주요 테이블:</strong></p>
-                        <ul>
-                            <li>sensors - 센서 데이터</li>
-                            <li>users - 사용자 정보</li>
-                            <li>statistics - 통계 데이터</li>
-                        </ul>
+                    <div class="architecture-layers">
+                        <div class="layer-box">
+                            <div class="layer-icon">🔧</div>
+                            <div class="layer-title">Hardware</div>
+                            <ul class="layer-items">
+                                <li>Arduino</li>
+                                <li>진동 센서</li>
+                                <li>조도 센서</li>
+                                <li>초음파 센서</li>
+                            </ul>
+                        </div>
+                        <div class="layer-box">
+                            <div class="layer-icon">⚙️</div>
+                            <div class="layer-title">Backend</div>
+                            <ul class="layer-items">
+                                <li>REST API</li>
+                                <li>데이터 처리</li>
+                                <li>AI 분석</li>
+                                <li>통계</li>
+                            </ul>
+                        </div>
+                        <div class="layer-box">
+                            <div class="layer-icon">🎨</div>
+                            <div class="layer-title">Frontend</div>
+                            <ul class="layer-items">
+                                <li>대시보드</li>
+                                <li>통계 분석</li>
+                                <li>실시간 모니터링</li>
+                                <li>설정 관리</li>
+                            </ul>
+                        </div>
+                        <div class="layer-box">
+                            <div class="layer-icon">💾</div>
+                            <div class="layer-title">Database</div>
+                            <ul class="layer-items">
+                                <li>H2 (개발)</li>
+                                <li>MySQL (프로덕션)</li>
+                                <li>센서 데이터</li>
+                                <li>사용자 정보</li>
+                            </ul>
+                        </div>
                     </div>
                 </section>
 
                 <section>
                     <h3>데이터 흐름</h3>
-                    <p style="font-size: 0.9em; line-height: 2;">
-                        <strong>Arduino</strong> 센서 데이터<br/>
-                        ↓ MQTT/Serial<br/>
-                        <strong>Python Backend</strong> 데이터 처리<br/>
-                        ↓ 저장 & 분석<br/>
-                        <strong>Database</strong> 데이터 보관<br/>
-                        ↓ REST API<br/>
-                        <strong>Web Frontend</strong> 실시간 대시보드<br/>
-                        ↓ 시각화<br/>
-                        <strong>사용자</strong> 모니터링 & 피드백
-                    </p>
+                    <div class="data-flow">
+                        <div>🔧 <strong>Hardware</strong></div>
+                        <div class="flow-arrow">↓ MQTT/Serial</div>
+                        <div>⚙️ <strong>Backend</strong></div>
+                        <div class="flow-arrow">↓ Processing</div>
+                        <div>💾 <strong>Database</strong></div>
+                        <div class="flow-arrow">↓ REST API</div>
+                        <div>🎨 <strong>Frontend</strong></div>
+                        <div class="flow-arrow">↓ Visualization</div>
+                        <div>👤 <strong>User</strong></div>
+                    </div>
                 </section>
             </section>
 
