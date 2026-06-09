@@ -27,10 +27,76 @@
 - **Pomodoro Mode:** 물리 버튼과 연동되는 스마트 뽀모도로 타이머 및 통계
 - **Posture Analysis:** 초음파 센서 거리 측정을 통한 거북목 방지 알림
 
+## ⚙️ 설치 및 셋업
+
+### Arduino 센서 연결 및 설정
+
+#### 1. 하드웨어 연결
+```
+HC-SR04 (초음파 센서):
+  TRIG → Digital Pin 7
+  ECHO → Digital Pin 8
+  VCC  → 5V
+  GND  → GND
+
+PWD-LED (조도 센서):
+  Signal → Analog Pin A0
+  VCC    → 5V
+  GND    → GND
+
+HW-072 (진동 센서):
+  Signal → Analog Pin A1
+  VCC    → 5V
+  GND    → GND
+
+Microphone (HW):
+  Signal → Analog Pin A2
+  +      → 5V
+  G      → GND
+```
+
+#### 2. Arduino IDE 설정
+1. Arduino IDE 다운로드: [arduino.cc](https://www.arduino.cc/en/software)
+2. 보드 선택: Tools → Board → Arduino Uno
+3. 포트 선택: Tools → Port → `/dev/cu.usbserial-140` (Mac)
+4. `arduino/sensor_sketch.ino` 파일 열기
+5. Upload 버튼 클릭 (또는 Ctrl+U)
+
+#### 3. Python Gateway 실행
+```bash
+# 1. 환경 변수 설정
+cp .env.example .env
+# .env 파일에서 ARDUINO_SERIAL_PORT 확인
+
+# 2. 의존성 설치
+pip install -r backend/requirements.txt
+
+# 3. MQTT 브로커 실행 (Docker)
+docker run -it --rm --name mosquitto -p 1883:1883 eclipse-mosquitto
+
+# 4. 다른 터미널에서 Gateway 실행
+python backend/arduino_gateway.py
+```
+
+#### 4. 데이터 흐름
+```
+Arduino (Sensors) 
+    ↓ (USB Serial)
+Python Gateway
+    ↓ (MQTT)
+MQTT Broker
+    ↓ (MQTT Subscribe)
+Backend Flask/FastAPI
+    ↓ (REST API)
+Flutter Mobile App
+```
+
+---
+
 ## 🛠 Tech Stack
 ### Hardware
-- **Controller:** Arduino Uno / ESP32
-- **Sensors:** Ultrasonic(HC-SR04), Photoresistor(LDR), Vibration(SW-420)
+- **Controller:** Arduino Uno
+- **Sensors:** Ultrasonic(HC-SR04), Photoresistor(PWD-LED), Vibration(HW-072), Microphone(HW)
 
 ### Backend & AI
 - **Language:** Python 3.10+
