@@ -22,33 +22,54 @@
             gap: 20px;
         }
 
+        /* Focus State Top - Above Webcam */
+        .focus-state-top {
+            background: white;
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 12px;
+        }
+
+        .focus-value-small {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .focus-state-top .focus-gauge {
+            height: 6px;
+        }
+
         /* Make pomodoro smaller for sidebar */
-        .dashboard-center .pomodoro-section {
-            padding: 20px;
+        .dashboard-sidebar .pomodoro-section {
+            padding: 16px;
         }
 
-        .dashboard-center .pomodoro-section h2 {
-            font-size: 1rem;
-            margin-bottom: 15px;
+        .dashboard-sidebar .pomodoro-section h2 {
+            font-size: 0.95rem;
+            margin-bottom: 12px;
         }
 
-        .dashboard-center .pomodoro-timer {
-            width: 150px;
-            height: 150px;
-            margin: 0 auto 15px;
+        .dashboard-sidebar .pomodoro-timer {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 12px;
         }
 
-        .dashboard-center .pomodoro-time {
-            font-size: 2rem;
+        .dashboard-sidebar .pomodoro-time {
+            font-size: 1.6rem;
         }
 
-        .dashboard-center .pomodoro-controls {
-            gap: 8px;
+        .dashboard-sidebar .pomodoro-controls {
+            gap: 6px;
         }
 
-        .dashboard-center .btn-small {
-            padding: 6px 12px;
-            font-size: 0.85rem;
+        .dashboard-sidebar .btn-small {
+            padding: 5px 10px;
+            font-size: 0.8rem;
         }
 
         /* Pomodoro Timer Section */
@@ -708,6 +729,14 @@
         <div class="dashboard-main">
             <!-- Main Center Area -->
             <div class="dashboard-center">
+                <!-- Focus State Card - Top -->
+                <div class="focus-state-top">
+                    <div class="focus-value-small" id="focusScoreTop">85%</div>
+                    <div class="focus-gauge">
+                        <div class="focus-gauge-fill" id="focusGaugeBarTop"></div>
+                    </div>
+                </div>
+
                 <!-- Webcam Section -->
                 <div class="webcam-section">
                     <h2>웹캠</h2>
@@ -787,22 +816,6 @@
                             <span class="mini-label">음성</span>
                             <span class="mini-value" id="miniMicrophoneValue">-</span>
                             <span class="mini-unit">%</span>
-                        </div>
-                    </div>
-
-                    <!-- Traditional Temp/Humidity -->
-                    <div class="env-info" style="margin-top: 12px;">
-                        <div class="env-item">
-                            <div class="env-label">온도</div>
-                            <div class="env-icon">🌡️</div>
-                            <div class="env-value" id="tempValue">23°</div>
-                            <div class="env-status" id="tempStatus">정상</div>
-                        </div>
-                        <div class="env-item">
-                            <div class="env-label">습도</div>
-                            <div class="env-icon">💧</div>
-                            <div class="env-value" id="humidValue">45%</div>
-                            <div class="env-status" id="humidStatus">정상</div>
                         </div>
                     </div>
                 </div>
@@ -1608,6 +1621,32 @@
             }
         }
 
+        // ============ Update Top Focus Bar ============
+        function updateTopFocusBar(score) {
+            const topValue = document.getElementById('focusScoreTop');
+            const topGauge = document.getElementById('focusGaugeBarTop');
+
+            if (topValue) topValue.textContent = score + '%';
+            if (topGauge) {
+                topGauge.style.width = score + '%';
+                topGauge.className = 'focus-gauge-fill';
+                if (score < 50) {
+                    topGauge.classList.add('low');
+                } else {
+                    topGauge.classList.remove('low');
+                }
+            }
+        }
+
+        // Override SidebarUpdater to also update top bar
+        const originalSidebarUpdater = SidebarUpdater;
+        SidebarUpdater = class extends originalSidebarUpdater {
+            updateFocusScore(score) {
+                super.updateFocusScore(score);
+                updateTopFocusBar(score);
+            }
+        };
+
         // ============ Initialize on Load ============
         document.addEventListener('DOMContentLoaded', () => {
             const pomodoro = new PomodoroTimer();
@@ -1615,6 +1654,9 @@
             const updater = new SidebarUpdater(pomodoro, gazeAnalyzer);
             const webcam = new DashboardWebcam(gazeAnalyzer);
             const sensorManager = new SensorDataManager();
+
+            // Initialize top focus bar
+            updateTopFocusBar(85);
         });
     </script>
 </body>
