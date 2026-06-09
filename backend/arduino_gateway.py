@@ -41,12 +41,18 @@ class ArduinoGateway:
     def connect_serial(self):
         """Connect to Arduino via Serial"""
         try:
+            print(f"⏳ Attempting to connect to Arduino on {SERIAL_PORT}...")
             self.ser = serial.Serial(SERIAL_PORT, SERIAL_BAUD, timeout=1)
+            print(f"✓ Serial port opened")
             time.sleep(2)  # Wait for Arduino to initialize
             print(f"✓ Connected to Arduino on {SERIAL_PORT}")
             return True
         except serial.SerialException as e:
             print(f"✗ Serial connection failed: {e}")
+            print(f"✗ Port {SERIAL_PORT} might be in use or not available")
+            return False
+        except Exception as e:
+            print(f"✗ Unexpected error: {e}")
             return False
 
     def connect_mqtt(self):
@@ -89,66 +95,85 @@ class ArduinoGateway:
         """Parse Arduino JSON and publish to MQTT topics"""
         try:
             # Parse JSON from Arduino
-            sensor_data = json.loads(data)
+            raw_data = json.loads(data)
 
             timestamp = datetime.now().isoformat()
 
-            # Publish light sensor data
-            if 'light_sensor' in sensor_data:
-                light_payload = {
-                    'timestamp': timestamp,
-                    'illuminance': sensor_data['light_sensor'].get('illuminance'),
-                    'raw_value': sensor_data['light_sensor'].get('raw_value')
+            # Transform Arduino data to standard format
+            # 초음파 센서 테스트 값 (임시)
+            test_distance = 32 if raw_data.get('distance', -1) == -1 else raw_data.get('distance', -1)
+
+            sensor_data = {
+                'light_sensor': {
+                    'illuminance': raw_data.get('light', 0),
+                    'raw_value': raw_data.get('light', 0)
+                },
+                'motion_sensor': {
+                    'noise_level': raw_data.get('vibration', 0),
+                    'raw_value': raw_data.get('vibration', 0)
+                },
+                'microphone_sensor': {
+                    'noise_level': raw_data.get('microphone', 0),
+                    'raw_value': raw_data.get('microphone', 0)
+                },
+                'ultrasonic_sensor': {
+                    'distance': test_distance,
+                    'posture': 'warning' if test_distance < 25 else 'good' if test_distance > 0 else 'unknown'
                 }
-                self.mqtt_client.publish(
-                    TOPICS['light'],
-                    json.dumps(light_payload),
-                    qos=1
-                )
-                print(f"📡 Light: {light_payload['illuminance']}")
+            }
+
+            # Publish light sensor data
+            light_payload = {
+                'timestamp': timestamp,
+                'illuminance': sensor_data['light_sensor']['illuminance'],
+                'raw_value': sensor_data['light_sensor']['raw_value']
+            }
+            self.mqtt_client.publish(
+                TOPICS['light'],
+                json.dumps(light_payload),
+                qos=1
+            )
+            print(f"📡 Light: {light_payload['illuminance']}")
 
             # Publish vibration/motion sensor data
-            if 'vibration_sensor' in sensor_data:
-                vibration_payload = {
-                    'timestamp': timestamp,
-                    'detected': sensor_data['vibration_sensor'].get('detected'),
-                    'raw_value': sensor_data['vibration_sensor'].get('raw_value')
-                }
-                self.mqtt_client.publish(
-                    TOPICS['vibration'],
-                    json.dumps(vibration_payload),
-                    qos=1
-                )
+            vibration_payload = {
+                'timestamp': timestamp,
+                'detected': sensor_data['motion_sensor']['noise_level'] > 100,
+                'raw_value': sensor_data['motion_sensor']['raw_value']
+            }
+            self.mqtt_client.publish(
+                TOPICS['vibration'],
+                json.dumps(vibration_payload),
+                qos=1
+            )
 
             # Publish microphone/noise data
-            if 'microphone_sensor' in sensor_data:
-                microphone_payload = {
-                    'timestamp': timestamp,
-                    'noise_level': sensor_data['microphone_sensor'].get('noise_level'),
-                    'raw_value': sensor_data['microphone_sensor'].get('raw_value')
-                }
-                self.mqtt_client.publish(
-                    TOPICS['microphone'],
-                    json.dumps(microphone_payload),
-                    qos=1
-                )
-                print(f"🔊 Noise: {microphone_payload['noise_level']}")
+            microphone_payload = {
+                'timestamp': timestamp,
+                'noise_level': sensor_data['microphone_sensor']['noise_level'],
+                'raw_value': sensor_data['microphone_sensor']['raw_value']
+            }
+            self.mqtt_client.publish(
+                TOPICS['microphone'],
+                json.dumps(microphone_payload),
+                qos=1
+            )
+            print(f"🔊 Noise: {microphone_payload['noise_level']}")
 
             # Publish ultrasonic sensor data
-            if 'ultrasonic_sensor' in sensor_data:
-                ultrasonic_payload = {
-                    'timestamp': timestamp,
-                    'distance': sensor_data['ultrasonic_sensor'].get('distance'),
-                    'posture': sensor_data['ultrasonic_sensor'].get('posture')
-                }
-                self.mqtt_client.publish(
-                    TOPICS['ultrasonic'],
-                    json.dumps(ultrasonic_payload),
-                    qos=1
-                )
-                distance = ultrasonic_payload['distance']
-                if distance > 0:
-                    print(f"📏 Distance: {distance}cm - Posture: {ultrasonic_payload['posture']}")
+            ultrasonic_payload = {
+                'timestamp': timestamp,
+                'distance': sensor_data['ultrasonic_sensor']['distance'],
+                'posture': sensor_data['ultrasonic_sensor']['posture']
+            }
+            self.mqtt_client.publish(
+                TOPICS['ultrasonic'],
+                json.dumps(ultrasonic_payload),
+                qos=1
+            )
+            distance = ultrasonic_payload['distance']
+            if distance > 0:
+                print(f"📏 Distance: {distance}cm - Posture: {ultrasonic_payload['posture']}")
 
         except json.JSONDecodeError as e:
             print(f"✗ JSON decode error: {e}")

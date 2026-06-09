@@ -39,6 +39,13 @@ int getUltrasonic() {
   digitalWrite(ULTRASONIC_TRIG, LOW);
   duration = pulseIn(ULTRASONIC_ECHO, HIGH, 30000);
   distance = (duration * 0.034) / 2;
+
+  // 디버깅: duration이 0이면 센서 미연결
+  if (duration == 0) {
+    Serial.println("{\"debug\": \"초음파 센서 미응답 - 센서 연결 확인 필요\"}");
+    return -1;
+  }
+
   return (distance > 2 && distance < 400) ? distance : -1;
 }
 

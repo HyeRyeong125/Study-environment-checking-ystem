@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>대시보드 - 집중력 강화 시스템</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="/src/css/style.css">
+    <link rel="stylesheet" href="/src/css/responsive.css">
     <style>
         /* Dashboard specific styles */
         .dashboard-main {
@@ -89,7 +89,7 @@
         .pomodoro-section {
             background: white;
             border-radius: 12px;
-            padding: 30px;
+            padding: 12px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
@@ -102,9 +102,9 @@
 
         .pomodoro-timer {
             position: relative;
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 20px;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 12px;
         }
 
         .pomodoro-svg {
@@ -138,21 +138,21 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 2.5rem;
+            font-size: 1.8rem;
             font-weight: bold;
             color: #2c3e50;
             font-family: 'Courier New', monospace;
         }
 
         .pomodoro-mode {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #7f8c8d;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
         }
 
         .pomodoro-controls {
             display: flex;
-            gap: 10px;
+            gap: 6px;
             justify-content: center;
             flex-wrap: wrap;
         }
@@ -282,13 +282,13 @@
         .dashboard-sidebar {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 10px;
         }
 
         .sidebar-card {
             background: white;
             border-radius: 12px;
-            padding: 16px;
+            padding: 12px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
@@ -383,7 +383,7 @@
         .time-stats {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 8px;
         }
 
         .time-item {
@@ -393,12 +393,12 @@
         }
 
         .time-label {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: #7f8c8d;
         }
 
         .time-value {
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: bold;
             color: #2c3e50;
         }
@@ -672,20 +672,29 @@
             gap: 10px;
         }
 
+        /* Mini Sensor Grid - Vertical (3x1) */
+        .mini-sensor-grid-vertical {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
         .mini-sensor {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             align-items: center;
+            justify-content: flex-start;
             background: #f8f9fa;
             border-radius: 8px;
-            padding: 10px;
+            padding: 8px 12px;
             border-left: 3px solid #3498db;
             transition: all 0.3s ease;
+            gap: 12px;
         }
 
         .mini-sensor:hover {
             background: #ecf0f1;
-            transform: translateY(-2px);
+            transform: translateY(-1px);
         }
 
         .mini-sensor.good {
@@ -701,27 +710,114 @@
         }
 
         .mini-icon {
-            font-size: 1.2rem;
-            margin-bottom: 4px;
+            font-size: 1.4rem;
+            flex-shrink: 0;
         }
 
         .mini-label {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: #95a5a6;
             text-transform: uppercase;
-            margin-bottom: 3px;
+            margin-bottom: 2px;
+            line-height: 1;
         }
 
         .mini-value {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: bold;
             color: #2c3e50;
             font-family: 'Courier New', monospace;
+            line-height: 1;
         }
 
         .mini-unit {
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             color: #bdc3c7;
+            line-height: 1;
+        }
+
+        .mini-sensor-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        /* AI Recommendations Section */
+        .ai-recommendations-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .ai-recommendations-section h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .recommendations-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .recommendation-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            padding: 15px;
+            color: white;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .recommendation-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .recommendation-item.loading {
+            background: #ecf0f1;
+            color: #7f8c8d;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .recommendation-category {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.9;
+            margin-bottom: 6px;
+        }
+
+        .recommendation-text {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .recommendation-confidence {
+            font-size: 0.75rem;
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .confidence-bar {
+            width: 60px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .confidence-fill {
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 2px;
         }
     </style>
 </head>
@@ -753,6 +849,11 @@
                     </div>
                 </div>
 
+                <!-- Main Focus Score (hidden, for JS reference) -->
+                <div id="focusStatus" style="display:none;"></div>
+                <div id="focusScore" style="display:none;"></div>
+                <div id="focusGaugeBar" style="display:none;"></div>
+
                 <!-- Webcam Section -->
                 <div class="webcam-section">
                     <h2>웹캠</h2>
@@ -764,6 +865,16 @@
                         <button class="webcam-btn stop" id="webcamStop" disabled>카메라 정지</button>
                     </div>
                 </div>
+
+                <!-- AI Recommendations Section -->
+                <div class="ai-recommendations-section">
+                    <h2>🤖 AI 추천</h2>
+                    <div class="recommendations-container" id="recommendationsContainer">
+                        <div class="recommendation-item loading">
+                            <span>추천사항을 불러오는 중...</span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Right Sidebar -->
@@ -771,7 +882,6 @@
                 <!-- Pomodoro Timer -->
                 <div class="pomodoro-section">
                     <div class="pomodoro-mode" id="pomodoroMode">집중 모드</div>
-                    <h2>뽀모도로</h2>
 
                     <div class="pomodoro-timer">
                         <svg class="pomodoro-svg" viewBox="0 0 200 200">
@@ -791,36 +901,34 @@
                 <div class="sidebar-card">
                     <h3>🌡️ 환경 & 센서</h3>
 
-                    <!-- Mini Sensor Grid -->
-                    <div class="mini-sensor-grid">
+                    <!-- Mini Sensor Grid (3x1) -->
+                    <div class="mini-sensor-grid-vertical">
                         <div class="mini-sensor" id="miniLight">
                             <span class="mini-icon">💡</span>
-                            <span class="mini-label">조도</span>
-                            <span class="mini-value" id="miniLightValue">-</span>
-                            <span class="mini-unit">lux</span>
+                            <div class="mini-sensor-text">
+                                <span class="mini-label">조도</span>
+                                <span class="mini-value" id="miniLightValue">-</span>
+                                <span class="mini-unit">lux</span>
+                            </div>
                         </div>
                         <div class="mini-sensor" id="miniMotion">
                             <span class="mini-icon">🔊</span>
-                            <span class="mini-label">소음</span>
-                            <span class="mini-value" id="miniMotionValue">-</span>
-                            <span class="mini-unit">dB</span>
+                            <div class="mini-sensor-text">
+                                <span class="mini-label">소음</span>
+                                <span class="mini-value" id="miniMotionValue">-</span>
+                                <span class="mini-unit">dB</span>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="mini-sensor-grid" style="margin-top: 8px;">
                         <div class="mini-sensor" id="miniUltrasonic">
                             <span class="mini-icon">📏</span>
-                            <span class="mini-label">거리</span>
-                            <span class="mini-value" id="miniUltrasonicValue">-</span>
-                            <span class="mini-unit">cm</span>
-                        </div>
-                        <div class="mini-sensor" id="miniMicrophone">
-                            <span class="mini-icon">🎤</span>
-                            <span class="mini-label">음성</span>
-                            <span class="mini-value" id="miniMicrophoneValue">-</span>
-                            <span class="mini-unit">%</span>
+                            <div class="mini-sensor-text">
+                                <span class="mini-label">거리</span>
+                                <span class="mini-value" id="miniUltrasonicValue">-</span>
+                                <span class="mini-unit">cm</span>
+                            </div>
                         </div>
                     </div>
+                    <div class="sensor-update-time" id="sensorUpdateTime">대기 중...</div>
                 </div>
 
                 <!-- Focus Time Card -->
@@ -875,7 +983,7 @@
     </div>
 
     <!-- External Scripts -->
-    <script src="../js/mediadevices.js"></script>
+    <script src="/src/js/mediadevices.js"></script>
 
     <!-- MediaPipe CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"></script>
@@ -1047,15 +1155,22 @@
             async init(videoElement) {
                 return new Promise((resolve, reject) => {
                     try {
+                        console.log('🔄 GazeAnalyzer initializing...');
+
                         // Check if MediaPipe is loaded
                         if (typeof FaceMesh === 'undefined') {
+                            console.error('❌ FaceMesh not loaded');
                             reject(new Error('FaceMesh not loaded. Check CDN link.'));
                             return;
                         }
+                        console.log('✓ FaceMesh loaded');
+
                         if (typeof Camera === 'undefined') {
+                            console.error('❌ Camera utils not loaded');
                             reject(new Error('Camera utils not loaded. Check CDN link.'));
                             return;
                         }
+                        console.log('✓ Camera utils loaded');
 
                         const faceMesh = new FaceMesh({
                             locateFile: (file) => {
@@ -1074,17 +1189,23 @@
 
                         this.faceMesh = faceMesh;
                         this.isReady = true;
+                        console.log('✓ FaceMesh configured');
 
                         // Create camera object for continuous frame processing
                         const camera = new Camera(videoElement, {
                             onFrame: async () => {
-                                await faceMesh.send({image: videoElement});
+                                try {
+                                    await faceMesh.send({image: videoElement});
+                                } catch (e) {
+                                    console.error('Frame processing error:', e);
+                                }
                             },
                             width: 1280,
                             height: 720
                         });
 
                         this.camera = camera;
+                        console.log('📹 Starting camera...');
                         this.camera.start();
                         this.isRunning = true;
 
@@ -1092,6 +1213,7 @@
                         resolve(true);
                     } catch (error) {
                         console.error('❌ GazeAnalyzer init error:', error);
+                        console.error('Error stack:', error.stack);
                         reject(error);
                     }
                 });
@@ -1211,7 +1333,8 @@
 
                 // A) If camera is off, freeze the score and skip sample collection
                 if (!this.gazeAnalyzer.isRunning) {
-                    document.getElementById('focusStatus').innerHTML = '📹 카메라를 시작해주세요.';
+                    const focusStatus = document.getElementById('focusStatus');
+                    if (focusStatus) focusStatus.innerHTML = '📹 카메라를 시작해주세요.';
                     this.updateFocusTimeStats();
                     return;
                 }
@@ -1241,8 +1364,13 @@
                 this.displayScore = this.displayScore * 0.9 + avg * 0.1;  // Smooth transition
 
                 // 4. Update focus score display
-                document.getElementById('focusScore').textContent = Math.round(this.displayScore) + '%';
-                document.getElementById('focusGaugeBar').style.width = this.displayScore + '%';
+                const focusScore = document.getElementById('focusScore');
+                if (focusScore) focusScore.textContent = Math.round(this.displayScore) + '%';
+                let focusGaugeBar = document.getElementById('focusGaugeBar');
+                if (focusGaugeBar) focusGaugeBar.style.width = this.displayScore + '%';
+
+                // Update top progress bar
+                updateTopFocusBar(Math.round(this.displayScore));
 
                 // B) Auto-pause when focus score reaches 0
                 if (Math.round(this.displayScore) <= 0 && this.pomodoroTimer.isRunning) {
@@ -1292,14 +1420,18 @@
                     statusClass = '';
                 }
 
-                document.getElementById('focusStatus').innerHTML = status;
-                document.getElementById('focusGaugeBar').className = 'focus-gauge-fill' + (statusClass ? ' ' + statusClass : '');
+                const focusStatus = document.getElementById('focusStatus');
+                if (focusStatus) focusStatus.innerHTML = status;
+                focusGaugeBar = document.getElementById('focusGaugeBar');
+                if (focusGaugeBar) focusGaugeBar.className = 'focus-gauge-fill' + (statusClass ? ' ' + statusClass : '');
 
                 // Update temperature & humidity
                 const temp = 20 + Math.random() * 8;
                 const humid = 40 + Math.random() * 30;
-                document.getElementById('tempValue').textContent = Math.round(temp) + '°';
-                document.getElementById('humidValue').textContent = Math.round(humid) + '%';
+                const tempValue = document.getElementById('tempValue');
+                if (tempValue) tempValue.textContent = Math.round(temp) + '°';
+                const humidValue = document.getElementById('humidValue');
+                if (humidValue) humidValue.textContent = Math.round(humid) + '%';
 
                 // Update environment status
                 this.updateEnvStatus('temp', temp);
@@ -1387,6 +1519,7 @@
 
             updateEnvStatus(type, value) {
                 const statusEl = document.getElementById(type + 'Status');
+                if (!statusEl) return;
                 if (type === 'temp') {
                     if (20 <= value && value <= 25) {
                         statusEl.textContent = '정상';
@@ -1415,9 +1548,10 @@
 
         // ============ Webcam Manager ============
         class DashboardWebcam {
-            constructor(gazeAnalyzer) {
+            constructor(gazeAnalyzer, pomodoroTimer) {
                 this.manager = new WebcamManager('webcam');
                 this.gazeAnalyzer = gazeAnalyzer;
+                this.pomodoroTimer = pomodoroTimer;
                 this.elements = {
                     startBtn: document.getElementById('webcamStart'),
                     stopBtn: document.getElementById('webcamStop')
@@ -1427,8 +1561,12 @@
             }
 
             setupEventListeners() {
-                this.elements.startBtn.addEventListener('click', () => this.start());
-                this.elements.stopBtn.addEventListener('click', () => this.stop());
+                if (this.elements.startBtn) {
+                    this.elements.startBtn.addEventListener('click', () => this.start());
+                }
+                if (this.elements.stopBtn) {
+                    this.elements.stopBtn.addEventListener('click', () => this.stop());
+                }
             }
 
             async start() {
@@ -1439,6 +1577,12 @@
                         await this.gazeAnalyzer.init(document.getElementById('webcam'));
                         this.elements.startBtn.disabled = true;
                         this.elements.stopBtn.disabled = false;
+
+                        // Start Pomodoro timer when camera is turned on
+                        if (this.pomodoroTimer && !this.pomodoroTimer.isRunning) {
+                            this.pomodoroTimer.start();
+                            console.log('▶️ 포모도로 타이머가 자동으로 시작되었습니다');
+                        }
                     } catch (error) {
                         console.error('Failed to initialize GazeAnalyzer:', error);
                         alert('얼굴 감지 기능을 초기화할 수 없습니다. 카메라 권한을 확인해주세요.');
@@ -1450,6 +1594,13 @@
             stop() {
                 this.manager.stopWebcam();
                 this.gazeAnalyzer.stop();
+
+                // Stop Pomodoro timer when camera is turned off
+                if (this.pomodoroTimer && this.pomodoroTimer.isRunning) {
+                    this.pomodoroTimer.pause();
+                    console.log('⏸️ 포모도로 타이머가 일시정지되었습니다');
+                }
+
                 this.elements.startBtn.disabled = false;
                 this.elements.stopBtn.disabled = true;
             }
@@ -1471,29 +1622,18 @@
                 this.timerId = null;
 
                 this.elements = {
-                    light: {
-                        value: document.getElementById('lightValue'),
-                        detail: document.getElementById('lightDetail'),
-                        card: document.getElementById('lightCard')
-                    },
-                    motion: {
-                        value: document.getElementById('motionValue'),
-                        detail: document.getElementById('motionDetail'),
-                        card: document.getElementById('motionCard')
-                    },
-                    ultrasonic: {
-                        value: document.getElementById('ultrasonicValue'),
-                        detail: document.getElementById('ultrasonicDetail'),
-                        card: document.getElementById('ultrasonicCard')
-                    },
-                    microphone: {
-                        value: document.getElementById('microphoneValue'),
-                        detail: document.getElementById('microphoneDetail'),
-                        card: document.getElementById('microphoneCard')
-                    },
-                    updateTime: document.getElementById('sensorUpdateTime')
+                    light: document.getElementById('miniLightValue'),
+                    motion: document.getElementById('miniMotionValue'),
+                    ultrasonic: document.getElementById('miniUltrasonicValue'),
+                    microphone: document.getElementById('miniMicrophoneValue'),
+                    updateTime: document.getElementById('sensorUpdateTime'),
+                    miniLightCard: document.getElementById('miniLight'),
+                    miniMotionCard: document.getElementById('miniMotion'),
+                    miniUltrasonicCard: document.getElementById('miniUltrasonic'),
+                    miniMicrophoneCard: document.getElementById('miniMicrophone')
                 };
 
+                console.log('✓ SensorDataManager 초기화됨');
                 this.startAutoUpdate();
             }
 
@@ -1515,7 +1655,9 @@
                     this.updateTimestamp();
                 } catch (error) {
                     console.error('Sensor data update error:', error);
-                    this.elements.updateTime.textContent = '⚠️ 데이터 로드 실패';
+                    if (this.elements.updateTime) {
+                        this.elements.updateTime.textContent = '⚠️ 데이터 로드 실패';
+                    }
                 }
             }
 
@@ -1523,20 +1665,13 @@
                 const light = data.light_sensor || {};
                 const value = light.illuminance || 0;
 
-                // Main card
-                if (this.elements.light.value) {
-                    this.elements.light.value.textContent = value;
-                    this.elements.light.detail.textContent = `Raw: ${light.raw_value || 0}`;
+                // Mini sensor 업데이트
+                if (this.elements.light) {
+                    this.elements.light.textContent = value;
                 }
-
-                // Mini sensor
-                const miniLight = document.getElementById('miniLightValue');
-                if (miniLight) miniLight.textContent = value;
-                const miniCard = document.getElementById('miniLight');
                 const status = value > 300 ? 'good' : value > 100 ? 'warning' : 'danger';
-                if (miniCard) {
-                    miniCard.className = 'mini-sensor ' + status;
-                    this.updateCardStatus(this.elements.light.card, status);
+                if (this.elements.miniLightCard) {
+                    this.elements.miniLightCard.className = 'mini-sensor ' + status;
                 }
             }
 
@@ -1544,20 +1679,13 @@
                 const motion = data.motion_sensor || {};
                 const value = motion.noise_level || 0;
 
-                // Main card
-                if (this.elements.motion.value) {
-                    this.elements.motion.value.textContent = value;
-                    this.elements.motion.detail.textContent = `Raw: ${motion.raw_value || 0}`;
+                // Mini sensor 업데이트
+                if (this.elements.motion) {
+                    this.elements.motion.textContent = value;
                 }
-
-                // Mini sensor
-                const miniMotion = document.getElementById('miniMotionValue');
-                if (miniMotion) miniMotion.textContent = value;
-                const miniCard = document.getElementById('miniMotion');
                 const status = value < 50 ? 'good' : value < 70 ? 'warning' : 'danger';
-                if (miniCard) {
-                    miniCard.className = 'mini-sensor ' + status;
-                    this.updateCardStatus(this.elements.motion.card, status);
+                if (this.elements.miniMotionCard) {
+                    this.elements.miniMotionCard.className = 'mini-sensor ' + status;
                 }
             }
 
@@ -1568,52 +1696,35 @@
 
                 const status = distance > 0 && posture === 'warning' ? 'warning' : distance > 0 ? 'good' : 'danger';
 
-                // Main card
-                if (distance > 0) {
-                    this.elements.ultrasonic.value.textContent = distance;
-                    this.elements.ultrasonic.detail.textContent = posture === 'warning' ? '⚠️ 거북목 주의' : '✅ 좋음';
-                } else {
-                    this.elements.ultrasonic.value.textContent = '-';
-                    this.elements.ultrasonic.detail.textContent = '센서 감지 안됨';
+                // Mini sensor 업데이트
+                if (this.elements.ultrasonic) {
+                    this.elements.ultrasonic.textContent = distance > 0 ? distance : '-';
                 }
-                this.updateCardStatus(this.elements.ultrasonic.card, status);
-
-                // Mini sensor
-                const miniUltrasonic = document.getElementById('miniUltrasonicValue');
-                if (miniUltrasonic) miniUltrasonic.textContent = distance > 0 ? distance : '-';
-                const miniCard = document.getElementById('miniUltrasonic');
-                if (miniCard) miniCard.className = 'mini-sensor ' + status;
+                if (this.elements.miniUltrasonicCard) {
+                    this.elements.miniUltrasonicCard.className = 'mini-sensor ' + status;
+                }
             }
 
             updateMicrophoneSensor(data) {
                 const microphone = data.microphone_sensor || {};
                 const value = microphone.noise_level || 0;
 
-                // Main card
-                if (this.elements.microphone.value) {
-                    this.elements.microphone.value.textContent = value;
-                    this.elements.microphone.detail.textContent = `Raw: ${microphone.raw_value || 0}`;
+                // Mini sensor 업데이트
+                if (this.elements.microphone) {
+                    this.elements.microphone.textContent = value;
                 }
-
-                // Mini sensor
-                const miniMicrophone = document.getElementById('miniMicrophoneValue');
-                if (miniMicrophone) miniMicrophone.textContent = value;
-                const miniCard = document.getElementById('miniMicrophone');
                 const status = value < 40 ? 'good' : value < 70 ? 'warning' : 'danger';
-                if (miniCard) {
-                    miniCard.className = 'mini-sensor ' + status;
-                    this.updateCardStatus(this.elements.microphone.card, status);
+                if (this.elements.miniMicrophoneCard) {
+                    this.elements.miniMicrophoneCard.className = 'mini-sensor ' + status;
                 }
-            }
-
-            updateCardStatus(card, status) {
-                card.className = 'sensor-card ' + status;
             }
 
             updateTimestamp() {
                 const now = new Date();
                 const timeStr = now.toLocaleTimeString('ko-KR');
-                this.elements.updateTime.textContent = `마지막 업데이트: ${timeStr}`;
+                if (this.elements.updateTime) {
+                    this.elements.updateTime.textContent = `마지막 업데이트: ${timeStr}`;
+                }
             }
 
             stop() {
@@ -1667,30 +1778,105 @@
             }
         }
 
-        // Override SidebarUpdater to also update top bar
-        const originalSidebarUpdater = SidebarUpdater;
-        SidebarUpdater = class extends originalSidebarUpdater {
-            updateFocusScore(score) {
-                super.updateFocusScore(score);
-                updateTopFocusBar(score);
+        // ============ AI Recommendations Manager ============
+        class AIRecommendationsManager {
+            constructor() {
+                this.apiUrl = 'http://localhost:5001/api';
+                this.container = document.getElementById('recommendationsContainer');
+                this.updateInterval = 30000; // 30초마다 업데이트
+                this.timerId = null;
+                this.loadRecommendations();
+                this.startAutoUpdate();
             }
-        };
+
+            loadRecommendations() {
+                fetch(`${this.apiUrl}/ai/recommendations`)
+                    .then(response => response.json())
+                    .then(data => this.displayRecommendations(data.recommendations))
+                    .catch(error => {
+                        console.error('AI recommendations error:', error);
+                        this.showError();
+                    });
+            }
+
+            displayRecommendations(recommendations) {
+                if (!this.container) return;
+
+                this.container.innerHTML = '';
+
+                if (!recommendations || recommendations.length === 0) {
+                    this.container.innerHTML = '<div class="recommendation-item loading">추천사항이 없습니다.</div>';
+                    return;
+                }
+
+                recommendations.forEach(rec => {
+                    const categoryLabels = {
+                        'time_management': { icon: '⏰', label: '시간 관리' },
+                        'environment': { icon: '🌍', label: '환경' },
+                        'posture': { icon: '🧍', label: '자세' },
+                        'breaks': { icon: '☕', label: '휴식' }
+                    };
+
+                    const categoryInfo = categoryLabels[rec.category] || { icon: '💡', label: rec.category };
+                    const confidence = Math.round(rec.confidence * 100);
+
+                    const item = document.createElement('div');
+                    item.className = 'recommendation-item';
+                    item.innerHTML = `
+                        <div class="recommendation-category">${categoryInfo.icon} ${categoryInfo.label}</div>
+                        <div class="recommendation-text">${rec.advice}</div>
+                        <div class="recommendation-confidence">
+                            신뢰도: ${confidence}%
+                            <div class="confidence-bar">
+                                <div class="confidence-fill" style="width: ${confidence}%"></div>
+                            </div>
+                        </div>
+                    `;
+                    this.container.appendChild(item);
+                });
+            }
+
+            showError() {
+                if (this.container) {
+                    this.container.innerHTML = '<div class="recommendation-item loading">⚠️ AI 추천을 불러올 수 없습니다.</div>';
+                }
+            }
+
+            startAutoUpdate() {
+                this.timerId = setInterval(() => this.loadRecommendations(), this.updateInterval);
+            }
+
+            stop() {
+                if (this.timerId) {
+                    clearInterval(this.timerId);
+                    this.timerId = null;
+                }
+            }
+        }
 
         // ============ Initialize on Load ============
         document.addEventListener('DOMContentLoaded', () => {
-            const pomodoro = new PomodoroTimer();
-            const gazeAnalyzer = new GazeAnalyzer();
-            const updater = new SidebarUpdater(pomodoro, gazeAnalyzer);
-            const webcam = new DashboardWebcam(gazeAnalyzer);
-            const sensorManager = new SensorDataManager();
+            try {
+                const pomodoro = new PomodoroTimer();
+                const gazeAnalyzer = new GazeAnalyzer();
+                const updater = new SidebarUpdater(pomodoro, gazeAnalyzer);
+                const webcam = new DashboardWebcam(gazeAnalyzer, pomodoro);
+                const sensorManager = new SensorDataManager();
+                const aiManager = new AIRecommendationsManager();
 
-            // Initialize top focus bar
-            updateTopFocusBar(85);
+                // Initialize top focus bar
+                updateTopFocusBar(85);
 
-            // Add reset button listener
+                console.log('✓ Dashboard initialized successfully');
+            } catch (error) {
+                console.error('Dashboard initialization error:', error);
+            }
+
+            // Always add reset button listener (ensure it works even if other components fail)
             const resetBtn = document.getElementById('resetBtn');
             if (resetBtn) {
                 resetBtn.addEventListener('click', resetAllData);
+                console.log('✓ Reset button initialized');
             }
         });
     </script>
