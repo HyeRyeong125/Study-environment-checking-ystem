@@ -733,7 +733,7 @@
                 <li><a href="dashboard.html" class="active">대시보드</a></li>
                 <li><a href="stats.html">통계</a></li>
                 <li><a href="settings.html">설정</a></li>
-                <li><button onclick="if(confirm('데이터를 초기화하시겠습니까?')) { localStorage.clear(); location.reload(); }" style="background: #e74c3c; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-size: 0.9rem;">🔄 초기화</button></li>
+                <li><button id="resetBtn" style="background: #e74c3c; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-size: 0.9rem;">🔄 초기화</button></li>
             </ul>
         </div>
     </nav>
@@ -1624,6 +1624,32 @@
             }
         }
 
+        // ============ Reset All Data ============
+        function resetAllData() {
+            if (confirm('모든 데이터를 초기화하시겠습니까?\n(카메라, 타이머, 통계 등 모든 데이터가 삭제됩니다)')) {
+                console.log('Resetting data...');
+                // Clear all localStorage
+                localStorage.clear();
+                sessionStorage.clear();
+
+                // Clear IndexedDB if exists
+                if (window.indexedDB) {
+                    const dbs = ['ecomind', 'focus', 'pomodoro'];
+                    dbs.forEach(dbName => {
+                        const req = indexedDB.deleteDatabase(dbName);
+                        req.onsuccess = () => console.log(dbName + ' deleted');
+                    });
+                }
+
+                console.log('All data cleared!');
+
+                // Reload page after a short delay
+                setTimeout(() => {
+                    location.reload(true); // true forces reload from server, not cache
+                }, 500);
+            }
+        }
+
         // ============ Update Top Focus Bar ============
         function updateTopFocusBar(score) {
             const topValue = document.getElementById('focusScoreTop');
@@ -1660,6 +1686,12 @@
 
             // Initialize top focus bar
             updateTopFocusBar(85);
+
+            // Add reset button listener
+            const resetBtn = document.getElementById('resetBtn');
+            if (resetBtn) {
+                resetBtn.addEventListener('click', resetAllData);
+            }
         });
     </script>
 </body>
