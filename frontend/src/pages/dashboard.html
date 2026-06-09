@@ -31,16 +31,29 @@
             margin-bottom: 12px;
         }
 
+        .focus-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .focus-label {
+            font-size: 0.95rem;
+            color: #7f8c8d;
+            font-weight: 600;
+            text-transform: capitalize;
+        }
+
         .focus-value-small {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: bold;
             color: #3498db;
-            margin-bottom: 8px;
-            text-align: center;
         }
 
         .focus-state-top .focus-gauge {
-            height: 6px;
+            height: 8px;
+            border-radius: 4px;
         }
 
         /* Make pomodoro smaller for sidebar */
@@ -731,7 +744,10 @@
             <div class="dashboard-center">
                 <!-- Focus State Card - Top -->
                 <div class="focus-state-top">
-                    <div class="focus-value-small" id="focusScoreTop">85%</div>
+                    <div class="focus-header">
+                        <span class="focus-label">집중도</span>
+                        <span class="focus-value-small" id="focusScoreTop">85%</span>
+                    </div>
                     <div class="focus-gauge">
                         <div class="focus-gauge-fill" id="focusGaugeBarTop"></div>
                     </div>
@@ -771,19 +787,6 @@
                         <button class="btn-small" id="pomodoroToggleMode">휴식</button>
                     </div>
                 </div>
-                <!-- Focus State Card -->
-                <div class="sidebar-card">
-                    <h3>📊 집중 상태</h3>
-                    <div class="focus-value" id="focusScore">85%</div>
-                    <div class="focus-gauge">
-                        <div class="focus-gauge-fill" id="focusGaugeBar"></div>
-                    </div>
-                    <div class="focus-status" id="focusStatus">
-                        현재 집중 중입니다.<br>
-                        집중도가 높습니다.
-                    </div>
-                </div>
-
                 <!-- Environment & Sensor Data Card -->
                 <div class="sidebar-card">
                     <h3>🌡️ 환경 & 센서</h3>
