@@ -496,6 +496,111 @@
         #resumeBtn:hover {
             background: #27ae60;
         }
+
+        /* Sensor Section */
+        .sensor-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .sensor-section h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .sensor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .sensor-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .sensor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .sensor-icon {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .sensor-name {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .sensor-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .sensor-unit {
+            font-size: 0.75rem;
+            opacity: 0.8;
+            margin-bottom: 8px;
+        }
+
+        .sensor-detail {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            background: rgba(0, 0, 0, 0.1);
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .sensor-update-time {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #95a5a6;
+            margin-top: 10px;
+        }
+
+        /* Sensor Card Status */
+        .sensor-card.good {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            box-shadow: 0 4px 12px rgba(46, 204, 113, 0.2);
+        }
+
+        .sensor-card.warning {
+            background: linear-gradient(135deg, #f39c12 0%, #d68910 100%);
+            box-shadow: 0 4px 12px rgba(243, 156, 18, 0.2);
+        }
+
+        .sensor-card.danger {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.2);
+        }
+
+        .sensor-card.good:hover {
+            box-shadow: 0 6px 20px rgba(46, 204, 113, 0.3);
+        }
+
+        .sensor-card.warning:hover {
+            box-shadow: 0 6px 20px rgba(243, 156, 18, 0.3);
+        }
+
+        .sensor-card.danger:hover {
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -545,6 +650,49 @@
                         <button class="webcam-btn start" id="webcamStart">카메라 시작</button>
                         <button class="webcam-btn stop" id="webcamStop" disabled>카메라 정지</button>
                     </div>
+                </div>
+
+                <!-- Real-time Sensor Data Section -->
+                <div class="sensor-section">
+                    <h2>📊 실시간 센서 데이터</h2>
+                    <div class="sensor-grid">
+                        <!-- Light Sensor -->
+                        <div class="sensor-card" id="lightCard">
+                            <div class="sensor-icon">💡</div>
+                            <div class="sensor-name">조도</div>
+                            <div class="sensor-value" id="lightValue">-</div>
+                            <div class="sensor-unit">lux</div>
+                            <div class="sensor-detail" id="lightDetail">Raw: -</div>
+                        </div>
+
+                        <!-- Motion/Noise Sensor -->
+                        <div class="sensor-card" id="motionCard">
+                            <div class="sensor-icon">🔊</div>
+                            <div class="sensor-name">소음도</div>
+                            <div class="sensor-value" id="motionValue">-</div>
+                            <div class="sensor-unit">dB</div>
+                            <div class="sensor-detail" id="motionDetail">Raw: -</div>
+                        </div>
+
+                        <!-- Ultrasonic Sensor -->
+                        <div class="sensor-card" id="ultrasonicCard">
+                            <div class="sensor-icon">📏</div>
+                            <div class="sensor-name">거리 (자세)</div>
+                            <div class="sensor-value" id="ultrasonicValue">-</div>
+                            <div class="sensor-unit">cm</div>
+                            <div class="sensor-detail" id="ultrasonicDetail">-</div>
+                        </div>
+
+                        <!-- Microphone Sensor -->
+                        <div class="sensor-card" id="microphoneCard">
+                            <div class="sensor-icon">🎤</div>
+                            <div class="sensor-name">음성감지</div>
+                            <div class="sensor-value" id="microphoneValue">-</div>
+                            <div class="sensor-unit">%</div>
+                            <div class="sensor-detail" id="microphoneDetail">Raw: -</div>
+                        </div>
+                    </div>
+                    <div class="sensor-update-time" id="sensorUpdateTime">마지막 업데이트: -</div>
                 </div>
             </div>
 
@@ -1222,12 +1370,133 @@
             }
         }
 
+        // ============ Sensor Data Manager ============
+        class SensorDataManager {
+            constructor() {
+                this.apiUrl = 'http://localhost:5001/api';
+                this.updateInterval = 2000; // 2 seconds
+                this.timerId = null;
+
+                this.elements = {
+                    light: {
+                        value: document.getElementById('lightValue'),
+                        detail: document.getElementById('lightDetail'),
+                        card: document.getElementById('lightCard')
+                    },
+                    motion: {
+                        value: document.getElementById('motionValue'),
+                        detail: document.getElementById('motionDetail'),
+                        card: document.getElementById('motionCard')
+                    },
+                    ultrasonic: {
+                        value: document.getElementById('ultrasonicValue'),
+                        detail: document.getElementById('ultrasonicDetail'),
+                        card: document.getElementById('ultrasonicCard')
+                    },
+                    microphone: {
+                        value: document.getElementById('microphoneValue'),
+                        detail: document.getElementById('microphoneDetail'),
+                        card: document.getElementById('microphoneCard')
+                    },
+                    updateTime: document.getElementById('sensorUpdateTime')
+                };
+
+                this.startAutoUpdate();
+            }
+
+            startAutoUpdate() {
+                this.updateSensorData();
+                this.timerId = setInterval(() => this.updateSensorData(), this.updateInterval);
+            }
+
+            async updateSensorData() {
+                try {
+                    const response = await fetch(`${this.apiUrl}/sensors/latest`);
+                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                    const data = await response.json();
+
+                    this.updateLightSensor(data);
+                    this.updateMotionSensor(data);
+                    this.updateUltrasonicSensor(data);
+                    this.updateMicrophoneSensor(data);
+                    this.updateTimestamp();
+                } catch (error) {
+                    console.error('Sensor data update error:', error);
+                    this.elements.updateTime.textContent = '⚠️ 데이터 로드 실패';
+                }
+            }
+
+            updateLightSensor(data) {
+                const light = data.light_sensor || {};
+                const value = light.illuminance || 0;
+                this.elements.light.value.textContent = value;
+                this.elements.light.detail.textContent = `Raw: ${light.raw_value || 0}`;
+
+                // Status: Green if > 300, Yellow if > 100, Red otherwise
+                this.updateCardStatus(this.elements.light.card, value > 300 ? 'good' : value > 100 ? 'warning' : 'danger');
+            }
+
+            updateMotionSensor(data) {
+                const motion = data.motion_sensor || {};
+                const value = motion.noise_level || 0;
+                this.elements.motion.value.textContent = value;
+                this.elements.motion.detail.textContent = `Raw: ${motion.raw_value || 0}`;
+
+                // Status: Green if < 50, Yellow if < 70, Red otherwise
+                this.updateCardStatus(this.elements.motion.card, value < 50 ? 'good' : value < 70 ? 'warning' : 'danger');
+            }
+
+            updateUltrasonicSensor(data) {
+                const ultrasonic = data.ultrasonic_sensor || {};
+                const distance = ultrasonic.distance || -1;
+                const posture = ultrasonic.posture || 'unknown';
+
+                if (distance > 0) {
+                    this.elements.ultrasonic.value.textContent = distance;
+                    this.elements.ultrasonic.detail.textContent = posture === 'warning' ? '⚠️ 거북목 주의' : '✅ 좋음';
+                    this.updateCardStatus(this.elements.ultrasonic.card, posture === 'warning' ? 'warning' : 'good');
+                } else {
+                    this.elements.ultrasonic.value.textContent = '-';
+                    this.elements.ultrasonic.detail.textContent = '센서 감지 안됨';
+                    this.updateCardStatus(this.elements.ultrasonic.card, 'danger');
+                }
+            }
+
+            updateMicrophoneSensor(data) {
+                const microphone = data.microphone_sensor || {};
+                const value = microphone.noise_level || 0;
+                this.elements.microphone.value.textContent = value;
+                this.elements.microphone.detail.textContent = `Raw: ${microphone.raw_value || 0}`;
+
+                // Status: Green if < 40, Yellow if < 70, Red otherwise
+                this.updateCardStatus(this.elements.microphone.card, value < 40 ? 'good' : value < 70 ? 'warning' : 'danger');
+            }
+
+            updateCardStatus(card, status) {
+                card.className = 'sensor-card ' + status;
+            }
+
+            updateTimestamp() {
+                const now = new Date();
+                const timeStr = now.toLocaleTimeString('ko-KR');
+                this.elements.updateTime.textContent = `마지막 업데이트: ${timeStr}`;
+            }
+
+            stop() {
+                if (this.timerId) {
+                    clearInterval(this.timerId);
+                    this.timerId = null;
+                }
+            }
+        }
+
         // ============ Initialize on Load ============
         document.addEventListener('DOMContentLoaded', () => {
             const pomodoro = new PomodoroTimer();
             const gazeAnalyzer = new GazeAnalyzer();
             const updater = new SidebarUpdater(pomodoro, gazeAnalyzer);
             const webcam = new DashboardWebcam(gazeAnalyzer);
+            const sensorManager = new SensorDataManager();
         });
     </script>
 </body>
