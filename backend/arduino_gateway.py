@@ -164,16 +164,24 @@ class ArduinoGateway:
             return False
 
         print("\n🚀 Arduino Gateway running... (Press Ctrl+C to exit)\n")
+        print("⏳ Waiting for sensor data...\n")
 
+        data_received = False
         try:
             while True:
                 if self.ser and self.ser.in_waiting:
                     try:
                         line = self.ser.readline().decode('utf-8').strip()
                         if line:
+                            if not data_received:
+                                print(f"✓ First data received!\n")
+                                data_received = True
+                            print(f"📨 Raw data: {line}")
                             self.publish_sensor_data(line)
-                    except UnicodeDecodeError:
-                        pass
+                    except UnicodeDecodeError as e:
+                        print(f"✗ Decode error: {e}")
+                    except Exception as e:
+                        print(f"✗ Error: {e}")
 
                 time.sleep(0.1)
 
