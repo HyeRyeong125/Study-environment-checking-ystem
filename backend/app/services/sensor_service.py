@@ -38,14 +38,15 @@ class SensorService:
             mqtt_thread = threading.Thread(target=self.mqtt_client.loop_forever, daemon=True)
             mqtt_thread.start()
 
-            print(f"✓ MQTT client initialized")
+            print("[OK] MQTT client initialized")
         except Exception as e:
-            print(f"✗ MQTT initialization error: {e}")
+            print(f"[WARN] MQTT initialization error: {e}")
+            print("[INFO] Running in standalone mode (MQTT disabled)")
 
     def on_connect(self, client, userdata, flags, rc):
         """Callback for when MQTT client connects"""
         if rc == 0:
-            print(f"✓ Connected to MQTT broker ({self.mqtt_broker}:{self.mqtt_port})")
+            print(f"[OK] Connected to MQTT broker ({self.mqtt_broker}:{self.mqtt_port})")
             self.mqtt_connected = True
 
             # Subscribe to sensor topics
@@ -56,9 +57,9 @@ class SensorService:
             ]
             for topic in topics:
                 client.subscribe(topic)
-                print(f"  - Subscribed to: {topic}")
+                print(f"[INFO] Subscribed to: {topic}")
         else:
-            print(f"✗ MQTT connection failed with code {rc}")
+            print(f"[ERROR] MQTT connection failed with code {rc}")
             self.mqtt_connected = False
 
     def on_message(self, client, userdata, msg):
@@ -90,15 +91,15 @@ class SensorService:
                     self.data_history.pop(0)
 
         except json.JSONDecodeError as e:
-            print(f"✗ JSON decode error in MQTT message: {e}")
+            print(f"[ERROR] JSON decode error in MQTT message: {e}")
         except Exception as e:
-            print(f"✗ Error processing MQTT message: {e}")
+            print(f"[ERROR] Error processing MQTT message: {e}")
 
     def on_disconnect(self, client, userdata, rc):
         """Callback for when MQTT client disconnects"""
         self.mqtt_connected = False
         if rc != 0:
-            print(f"✗ Unexpected MQTT disconnection (code: {rc})")
+            print(f"[WARN] Unexpected MQTT disconnection (code: {rc})")
 
     def is_connected(self):
         """Check if MQTT connection is active"""
