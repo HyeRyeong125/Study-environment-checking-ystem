@@ -1,6 +1,6 @@
 // EcoMind API Client
 class EcoMindAPI {
-  constructor(baseURL = 'http://localhost:5001/api') {
+  constructor(baseURL = 'http://localhost:3000/api') {
     this.baseURL = baseURL;
   }
 

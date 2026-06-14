@@ -9,7 +9,7 @@ let dashboardData = {
 
 // Configuration
 const CONFIG = {
-  API_URL: 'http://localhost:5001/api',
+  API_URL: 'http://localhost:3000/api',
   UPDATE_INTERVAL: 2000, // 2 seconds
   HISTORY_LIMIT: 50
 };
