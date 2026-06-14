@@ -1617,7 +1617,7 @@
         // ============ Sensor Data Manager ============
         class SensorDataManager {
             constructor() {
-                this.apiUrl = 'http://localhost:5001/api';
+                this.apiUrl = 'http://localhost:3000/api';
                 this.updateInterval = 2000; // 2 seconds
                 this.timerId = null;
 
@@ -1781,7 +1781,7 @@
         // ============ AI Recommendations Manager ============
         class AIRecommendationsManager {
             constructor() {
-                this.apiUrl = 'http://localhost:5001/api';
+                this.apiUrl = 'http://localhost:3000/api';
                 this.container = document.getElementById('recommendationsContainer');
                 this.updateInterval = 30000; // 30초마다 업데이트
                 this.timerId = null;
