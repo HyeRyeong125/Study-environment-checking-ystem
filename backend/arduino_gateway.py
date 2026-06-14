@@ -27,7 +27,7 @@ MQTT_PASSWORD = os.getenv('MQTT_PASSWORD', None)
 TOPICS = {
     'light': 'home/sensors/light',
     'vibration': 'home/sensors/motion',
-    'microphone': 'home/sensors/motion',
+    'microphone': 'home/sensors/microphone',
     'ultrasonic': 'home/sensors/ultrasonic'
 }
 
@@ -99,22 +99,35 @@ class ArduinoGateway:
 
             timestamp = datetime.now().isoformat()
 
-            # Transform Arduino data to standard format
-            # 초음파 센서 테스트 값 (임시)
-            test_distance = 32 if raw_data.get('distance', -1) == -1 else raw_data.get('distance', -1)
+            # ADC to proper unit conversion
+            raw_light = raw_data.get('light', 0)
+            raw_microphone = raw_data.get('microphone', 0)
+            raw_distance = raw_data.get('distance', -1)
+
+            # Convert ADC light value (0-1023) to estimated lux (0-1000)
+            light_lux = max(0, (raw_light / 1023.0) * 1000)
+
+            # Convert ADC microphone value (0-1023) to dB (0-120)
+            microphone_db = max(0, (raw_microphone / 1023.0) * 120)
+
+            # Transform ultrasonic distance
+            if raw_distance > 0:
+                test_distance = max(0, 400 - raw_distance)
+            else:
+                test_distance = -1
 
             sensor_data = {
                 'light_sensor': {
-                    'illuminance': raw_data.get('light', 0),
-                    'raw_value': raw_data.get('light', 0)
+                    'illuminance': light_lux,
+                    'raw_value': raw_light
                 },
                 'motion_sensor': {
                     'noise_level': raw_data.get('vibration', 0),
                     'raw_value': raw_data.get('vibration', 0)
                 },
                 'microphone_sensor': {
-                    'noise_level': raw_data.get('microphone', 0),
-                    'raw_value': raw_data.get('microphone', 0)
+                    'noise_level': microphone_db,
+                    'raw_value': raw_microphone
                 },
                 'ultrasonic_sensor': {
                     'distance': test_distance,

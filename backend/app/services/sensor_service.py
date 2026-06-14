@@ -53,6 +53,7 @@ class SensorService:
             topics = [
                 'home/sensors/light',
                 'home/sensors/motion',
+                'home/sensors/microphone',
                 'home/sensors/ultrasonic'
             ]
             for topic in topics:
@@ -74,6 +75,8 @@ class SensorService:
                     self.latest_data['light_sensor'] = payload
                 elif 'motion' in topic:
                     self.latest_data['motion_sensor'] = payload
+                elif 'microphone' in topic:
+                    self.latest_data['microphone_sensor'] = payload
                 elif 'ultrasonic' in topic:
                     self.latest_data['ultrasonic_sensor'] = payload
 
@@ -123,6 +126,10 @@ class SensorService:
             },
             'light_sensor': {
                 'illuminance': 0,
+                'raw_value': 0
+            },
+            'microphone_sensor': {
+                'noise_level': 0,
                 'raw_value': 0
             },
             'ultrasonic_sensor': {

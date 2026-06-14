@@ -1676,14 +1676,14 @@
             }
 
             updateMotionSensor(data) {
-                const motion = data.motion_sensor || {};
-                const value = motion.noise_level || 0;
+                const microphone = data.microphone_sensor || {};
+                const value = microphone.noise_level || 0;
 
-                // Mini sensor 업데이트
+                // Mini sensor 업데이트 (마이크/소음도)
                 if (this.elements.motion) {
-                    this.elements.motion.textContent = value;
+                    this.elements.motion.textContent = Math.round(value);
                 }
-                const status = value < 50 ? 'good' : value < 70 ? 'warning' : 'danger';
+                const status = value < 40 ? 'good' : value < 70 ? 'warning' : 'danger';
                 if (this.elements.miniMotionCard) {
                     this.elements.miniMotionCard.className = 'mini-sensor ' + status;
                 }
