@@ -1,122 +1,271 @@
-# 🌿 EcoMind: AI 기반 스마트 학습 환경 최적화 시스템
-> **Arduino + FastAPI + EXAONE AI + Flutter**를 활용한 Full-Stack IoT 프로젝트입니다.
+# 🌿 EcoMind - 집중력 강화 시스템
 
-[![Platform](https://img.shields.io/badge/Platform-Flutter%20%7C%20Android%20%7C%20iOS-blue)](https://flutter.dev)
-[![Backend](https://img.shields.io/badge/Backend-FastAPI-green)](https://fastapi.tiangolo.com)
-[![AI](https://img.shields.io/badge/AI-LG%20EXAONE-orange)](https://www.lgresearch.ai/)
+IoT 센서와 AI를 활용한 **개인화된 집중력 모니터링 및 추천 시스템**입니다.
+실시간 환경 분석, 포모도로 타이머, 얼굴 인식 기반 집중도 분석 등의 기능을 제공합니다.
 
----
+## 📋 목차
 
-## 🎬 📊 라이브 프레젠테이션
+- [주요 기능](#-주요-기능)
+- [기술 스택](#-기술-스택)
+- [시스템 요구사항](#-시스템-요구사항)
+- [설치 및 셋업](#-설치-및-셋업)
+- [실행 방법](#-실행-방법)
+- [프로젝트 구조](#-프로젝트-구조)
+- [API 엔드포인트](#-api-엔드포인트)
+- [문제 해결](#-문제-해결)
 
-**[GitHub Pages에서 인터랙티브 프레젠테이션 보기 →](https://HyeRyeong125.github.io/Study-environment-checking-ystem/presentation/)**
+## ✨ 주요 기능
 
-프로젝트의 비전, 시스템 아키텍처, WBS(Work Breakdown Structure)를 포함한 완전한 프레젠테이션입니다.
+### 🎯 센서 모니터링
+- **조도 센서**: 주변 조명 레벨 실시간 감지 (lux 단위)
+- **소음 센서**: 환경 소음 레벨 측정 (dB 단위)
+- **동작 감지**: 사용자 활동 여부 감지
 
-**키보드 단축키:** Space/→(다음) ← (이전) | F(전체화면) | S(발표자 모드) | Esc(맵) | ?(도움말)
+### ⏱️ 포모도로 타이머
+- 25분 집중 / 5분 휴식 자동 반복
+- 집중도 기반 자동 일시정지/재개
+- 일일 세션 통계 추적
 
----
+### 😊 AI 기반 집중도 분석
+- **MediaPipe Face Mesh**를 이용한 얼굴 인식
+- 시선 추적 (정면/아래/옆 감지)
+- 자세 분석
+- 개인화된 집중 점수 계산
 
-## 📝 Project Overview
-단순히 공부 시간을 기록하는 것을 넘어, 하드웨어 센서를 통해 자세, 소음, 활동량 등 실제 학습 환경을 이해하고 EXAONE AI가 이를 분석하여 학생이 가장 몰입할 수 있는 환경으로 스스로 조정해 나가도록 돕는 지능형 학습 동반자입니다.
+### 🤖 AI 추천 시스템
+- **EXAONE AI** 기반 개인화 추천
+- 최적 작업 시간대 제안
+- 환경 개선 제안
+- 휴식 및 건강 조언
 
-## ✨ Key Features
-- **Real-time Monitoring:** 초음파/조도/진동 센서를 통한 학습 환경 데이터 수집
-- **AI Focus Guide:** EXAONE 기반의 맞춤형 자연어 피드백 제공 (자세 교정, 조명 권장 등)
-- **Focus Score:** 4가지 센서 데이터를 종합한 '집중 환경 점수(100pt)' 산출
-- **Pomodoro Mode:** 물리 버튼과 연동되는 스마트 뽀모도로 타이머 및 통계
-- **Posture Analysis:** 초음파 센서 거리 측정을 통한 거북목 방지 알림
+### 📊 통계 및 분석
+- 주간/월간 집중도 추이
+- 환경 점수 그래프
+- 월간 달력 뷰
+- 일일 상세 통계
 
-## ⚙️ 설치 및 셋업
+## 🛠️ 기술 스택
 
-### Arduino 센서 연결 및 설정
+### Backend
+- **Python 3.8+**: Flask, MQTT, PySerial
+- **Flask**: REST API 서버
+- **MQTT (Mosquitto)**: 센서 데이터 브로커
+- **PySerial**: Arduino 시리얼 통신
 
-#### 1. 하드웨어 연결
-```
-HC-SR04 (초음파 센서):
-  TRIG → Digital Pin 7
-  ECHO → Digital Pin 8
-  VCC  → 5V
-  GND  → GND
+### Frontend
+- **HTML5, CSS3, JavaScript**: 웹 인터페이스
+- **MediaPipe**: 얼굴 인식 및 랜드마크 감지
+- **JavaScript Canvas**: 실시간 시각화
 
-PWD-LED (조도 센서):
-  Signal → Analog Pin A0
-  VCC    → 5V
-  GND    → GND
-
-HW-072 (진동 센서):
-  Signal → Analog Pin A1
-  VCC    → 5V
-  GND    → GND
-
-Microphone (HW):
-  Signal → Analog Pin A2
-  +      → 5V
-  G      → GND
-```
-
-#### 2. Arduino IDE 설정
-1. Arduino IDE 다운로드: [arduino.cc](https://www.arduino.cc/en/software)
-2. 보드 선택: Tools → Board → Arduino Uno
-3. 포트 선택: Tools → Port → `/dev/cu.usbserial-140` (Mac)
-4. `arduino/sensor_sketch.ino` 파일 열기
-5. Upload 버튼 클릭 (또는 Ctrl+U)
-
-#### 3. Python Gateway 실행
-```bash
-# 1. 환경 변수 설정
-cp .env.example .env
-# .env 파일에서 ARDUINO_SERIAL_PORT 확인
-
-# 2. 의존성 설치
-pip install -r backend/requirements.txt
-
-# 3. MQTT 브로커 실행 (Docker)
-docker run -it --rm --name mosquitto -p 1883:1883 eclipse-mosquitto
-
-# 4. 다른 터미널에서 Gateway 실행
-python backend/arduino_gateway.py
-```
-
-#### 4. 데이터 흐름
-```
-Arduino (Sensors) 
-    ↓ (USB Serial)
-Python Gateway
-    ↓ (MQTT)
-MQTT Broker
-    ↓ (MQTT Subscribe)
-Backend Flask/FastAPI
-    ↓ (REST API)
-Flutter Mobile App
-```
-
----
-
-## 🛠 Tech Stack
 ### Hardware
-- **Controller:** Arduino Uno
-- **Sensors:** Ultrasonic(HC-SR04), Photoresistor(PWD-LED), Vibration(HW-072), Microphone(HW)
+- **Arduino Uno**: 마이크로컨트롤러
+- **CdS 포토레지스터**: 조도 센서
+- **마이크**: 소음 센서
+- **USB-to-Serial 케이블**
 
-### Backend & AI
-- **Language:** Python 3.10+
-- **Framework:** FastAPI
-- **AI Model:** LG EXAONE (via API/Local)
-- **Database:** PostgreSQL (Log Data), Redis (Real-time State)
+## 📦 시스템 요구사항
 
-### Mobile
-- **Framework:** Flutter
-- **State Management:** GetX
-- **Communication:** MQTT / REST API
+### 소프트웨어
+- Python 3.8 이상
+- MQTT 브로커 (Mosquitto)
+- 최신 웹 브라우저 (Chrome, Firefox, Safari)
 
-## 🏗 System Architecture
-```mermaid
-graph TD
-    A[Arduino Sensors] -->|Serial/MQTT| B[Python Gateway]
-    B --> C[FastAPI Server]
-    C --> D[(PostgreSQL)]
-    C --> E[EXAONE AI Model]
-    E -->|Analysis| C
-    C --> F[Flutter Mobile App]
-    F -->|Control| C
-    C -->|Command| A
+### 하드웨어
+- Arduino Uno 마이크로컨트롤러
+- 센서 모듈 (조도, 소음)
+- USB 케이블
+- Webcam (집중도 분석 기능 사용 시)
+
+### 포트 요구사항
+- **3000**: Flask 웹 서버
+- **1883**: MQTT 브로커
+
+## 🚀 설치 및 셋업
+
+### 1️⃣ 저장소 클론
+
+```bash
+git clone https://github.com/HyeRyeong125/Study-environment-checking-ystem.git
+cd 앱프_프젝
+```
+
+### 2️⃣ Python 의존성 설치
+
+```bash
+cd backend
+pip install -r requirements.txt
+```
+
+### 3️⃣ MQTT 브로커 설치
+
+**macOS:**
+```bash
+brew install mosquitto
+```
+
+**Ubuntu/Debian:**
+```bash
+sudo apt-get install mosquitto mosquitto-clients
+```
+
+### 4️⃣ Arduino 설정
+
+1. Arduino IDE 다운로드
+2. `arduino/sensor_sketch/sensor_sketch.ino` 파일 업로드
+3. 보드: Arduino Uno 선택
+4. 포트: USB 포트 선택
+
+### 5️⃣ 환경 변수 설정
+
+`.env` 파일 생성 (backend 디렉토리):
+
+```env
+ARDUINO_SERIAL_PORT=/dev/cu.usbserial-1130
+ARDUINO_BAUD_RATE=9600
+MQTT_BROKER=localhost
+MQTT_PORT=1883
+PORT=3000
+```
+
+## ⚙️ 실행 방법
+
+### 터미널 1️⃣: MQTT 브로커
+
+```bash
+mosquitto
+```
+
+### 터미널 2️⃣: Arduino Gateway
+
+```bash
+cd backend
+python arduino_gateway.py
+```
+
+### 터미널 3️⃣: Flask 백엔드
+
+```bash
+cd backend
+python main.py
+```
+
+### 브라우저 접속
+
+```
+http://localhost:3000
+```
+
+## 📁 프로젝트 구조
+
+```
+앱프_프젝/
+├── backend/
+│   ├── app/
+│   │   ├── services/
+│   │   │   ├── sensor_service.py
+│   │   │   ├── ai_service.py
+│   │   │   └── data_service.py
+│   │   ├── api/
+│   │   │   └── routes.py
+│   │   └── __init__.py
+│   ├── arduino_gateway.py
+│   ├── main.py
+│   ├── .env
+│   └── requirements.txt
+│
+├── frontend/
+│   ├── src/
+│   │   ├── pages/
+│   │   │   ├── dashboard.html
+│   │   │   ├── stats.html
+│   │   │   └── settings.html
+│   │   ├── css/
+│   │   │   ├── style.css
+│   │   │   └── responsive.css
+│   │   └── js/
+│   │       └── mediadevices.js
+│   ├── presentation.html
+│   └── index.html
+│
+├── arduino/
+│   └── sensor_sketch/
+│       └── sensor_sketch.ino
+│
+└── README.md
+```
+
+## 🔌 API 엔드포인트
+
+**GET `/api/sensors/latest`** - 최신 센서 데이터
+
+**GET `/api/ai/recommendations`** - AI 추천사항
+
+**GET `/api/stats/summary`** - 통계 요약
+
+**GET `/api/stats/history`** - 기간별 히스토리
+
+## 🎨 사용법
+
+### 📊 대시보드
+1. 좌측: AI 추천사항 확인
+2. 중앙: 웹캠 켜서 집중도 모니터링
+3. 우측: 포모도로 타이머 및 센서 상태
+
+### ⏰ 포모도로 타이머
+- 카메라 켜기 → 자동 시작
+- 집중도 기반 자동 일시정지/재개
+- 일일 통계 추적
+
+### 📈 통계 페이지
+- 월간 요약
+- 주간 집중 시간 그래프
+- 환경 점수 추이
+- 일일 상세 통계
+
+## 🔧 문제 해결
+
+### Arduino 연결 불가
+```bash
+# 포트 확인
+ls /dev/cu.usbserial-*
+
+# .env 파일의 ARDUINO_SERIAL_PORT 수정
+```
+
+### MQTT 연결 불가
+```bash
+# Mosquitto 실행 확인
+ps aux | grep mosquitto
+
+# 실행 안 되면 시작
+mosquitto
+```
+
+### 포트 3000 이미 사용 중
+```bash
+lsof -i :3000
+kill -9 <PID>
+```
+
+## 📝 환경 변수
+
+| 변수 | 기본값 | 설명 |
+|------|--------|------|
+| `ARDUINO_SERIAL_PORT` | `/dev/cu.usbserial-140` | Arduino USB 포트 |
+| `MQTT_BROKER` | `localhost` | MQTT 브로커 주소 |
+| `MQTT_PORT` | `1883` | MQTT 포트 |
+| `PORT` | `3000` | Flask 포트 |
+
+## 📄 라이선스
+
+MIT License
+
+## 👤 개발자
+
+- **개발**: HyeRyeong125
+- **프로젝트**: EcoMind (집중력 강화 시스템)
+- **마지막 업데이트**: 2026-06-15
+
+---
+
+**행운을 빕니다! 집중의 시간을 즐기세요 🌿**
