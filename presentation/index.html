@@ -11,17 +11,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #2E5090;          /* 차분한 파란색 (주색) */
-            --primary-light: #5B7FB8;
-            --primary-bg: rgba(46, 80, 144, 0.06);
-            --primary-bg-strong: rgba(46, 80, 144, 0.10);
-            --accent: #FF6B35;           /* 주황색 (강조색) */
-            --accent-bg: rgba(255, 107, 53, 0.08);
+            --primary: #6FB3D2;          /* 파스텔 블루 (주색) */
+            --primary-light: #A8D5E2;
+            --primary-bg: rgba(168, 213, 226, 0.18);
+            --primary-bg-strong: rgba(168, 213, 226, 0.30);
+            --accent: #5AA0C4;           /* 강조색: 조금 더 진한 파스텔 블루 */
+            --accent-bg: rgba(212, 235, 255, 0.55);
             --bg: #FFFFFF;
-            --bg-soft: #F5F5F5;
-            --text: #1F2430;             /* 어두운 텍스트 */
-            --text-muted: #5A6270;
-            --border: #E3E7EE;
+            --bg-soft: #F4FAFD;
+            --text: #2C3E50;             /* 짙은 파란빛 텍스트 */
+            --text-muted: #5E7A8C;
+            --border: #C5E0F0;
         }
 
         /* ---------- 전역 ---------- */
@@ -37,9 +37,9 @@
 
         .reveal .slides section {
             background: var(--bg);
-            height: 100%;
+            height: auto;
             box-sizing: border-box;
-            padding: 0 12px;
+            padding: 20px;
         }
 
         /* ---------- 타이포그래피 ---------- */
@@ -72,7 +72,7 @@
         }
 
         .reveal p, .reveal li {
-            font-size: 0.78em;
+            font-size: 0.85em;
             line-height: 1.55;
             color: var(--text);
         }
@@ -84,35 +84,36 @@
 
         /* ---------- 제목 슬라이드 ---------- */
         .cover {
-            background: linear-gradient(135deg, #2E5090 0%, #1B3766 100%) !important;
-            color: #fff !important;
+            background: linear-gradient(135deg, #D4EBFF 0%, #A8D5E2 100%) !important;
+            color: var(--text) !important;
             text-align: center !important;
             display: flex !important;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            min-height: 640px;
         }
         .cover .logo { font-size: 3.2em; margin-bottom: 0.1em; }
         .cover h1 {
-            color: #fff;
+            color: var(--text);
             font-size: 3.2em;
             font-weight: 800;
             letter-spacing: -0.02em;
             margin: 0;
         }
         .cover .subtitle {
-            color: #DCE6F5;
+            color: #3A5A6E;
             font-size: 1.15em;
             font-weight: 500;
             margin-top: 0.5em;
         }
         .cover .accent-line {
             width: 64px; height: 4px;
-            background: var(--accent);
+            background: var(--primary);
             border-radius: 2px;
             margin: 1.2em auto;
         }
-        .cover .meta { color: #AEC0DE; font-size: 0.75em; margin-top: 0.5em; }
+        .cover .meta { color: #5E7A8C; font-size: 0.75em; margin-top: 0.5em; }
 
         /* ---------- 카드 / 박스 ---------- */
         .card {
@@ -253,24 +254,25 @@
             overflow-x: auto;
         }
         .code .cmt { color: #7E879A; }
-        .code .dir { color: #FF9B6B; }
+        .code .dir { color: #8FD3F0; }
 
         /* ---------- 배너 ---------- */
         .banner {
-            background: linear-gradient(135deg, var(--primary) 0%, #1B3766 100%);
-            color: #fff;
+            background: linear-gradient(135deg, #D4EBFF 0%, #A8D5E2 100%);
+            color: var(--text);
+            border: 1px solid var(--border);
             border-radius: 10px;
             padding: 0.8em 1.1em;
             text-align: center;
             margin-top: 0.8em;
         }
-        .banner strong { color: #fff; }
-        .banner p { color: #DCE6F5; margin: 0.2em 0 0; font-size: 0.75em; }
+        .banner strong { color: var(--primary); }
+        .banner p { color: #3A5A6E; margin: 0.2em 0 0; font-size: 0.75em; }
 
         /* ---------- reveal 컨트롤/진행바 색상 ---------- */
         .reveal .progress { color: var(--accent); }
         .reveal .controls { color: var(--primary); }
-        .reveal .slide-number { background: rgba(46,80,144,0.08); color: var(--primary); }
+        .reveal .slide-number { background: rgba(168,213,226,0.25); color: var(--primary); }
     </style>
 </head>
 <body>
@@ -584,7 +586,7 @@ mosquitto & python arduino_gateway.py & python main.py
                 <div class="logo">🌿</div>
                 <h1>EcoMind</h1>
                 <div class="accent-line"></div>
-                <div class="subtitle">IoT + AI로 만드는 <span style="color:#FF6B35;font-weight:700;">집중력 있는 삶</span></div>
+                <div class="subtitle">IoT + AI로 만드는 <span style="color:#2C3E50;font-weight:700;">집중력 있는 삶</span></div>
                 <div class="meta" style="margin-top:1.2em;">실시간 모니터링 · 개인화 분석 · AI 조언 · 효율 증대</div>
                 <div class="meta">GitHub · HyeRyeong125</div>
             </section>
@@ -615,12 +617,12 @@ mosquitto & python arduino_gateway.py & python main.py
             keyboard: true,
             touch: true,
             overview: true,
-            center: true,
+            center: false,
             controls: true,
             progress: true,
             width: 960,
             height: 700,
-            margin: 0.08,
+            margin: 0.04,
             minScale: 0.2,
             maxScale: 2.0,
             plugins: [RevealNotes, RevealMarkdown, RevealHighlight]
