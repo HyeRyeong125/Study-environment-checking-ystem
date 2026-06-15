@@ -1,136 +1,163 @@
-# 프레젠테이션 가이드
+# 📊 EcoMind 발표 자료
 
-## 개요
-이 폴더는 집중력 강화 시스템에 대한 프레젠테이션을 포함합니다.
+## 🎯 발표 개요
 
-## 파일 구조
+이 폴더는 **EcoMind (IoT 센서 & AI 기반 집중력 강화 시스템)** 프로젝트의 발표 자료를 포함합니다.
+
+## 📋 발표 기준 (30점 만점)
+
+### 1. 발표 체계성 (10점)
+- ✅ 비전 표현: 집중력 강화 시스템의 필요성 및 목표
+- ✅ 문제 정의: 학생/직장인의 집중 환경 문제 정의
+- ✅ WBS 표시: 4계층 구조 상세 표현
+- ✅ 기술 설명: Python, Flask, MQTT, Arduino, MediaPipe 등
+- ✅ 진행 및 완료: 5단계 프로젝트 타임라인
+- ✅ 구현 방식: 각 계층별 상세 구현
+- ✅ 활용 방안: 학생, 직장인, 기업, 교육기관 등
+
+### 2. 질의응답 (5점)
+- ✅ ADR 3개: MQTT, Flask, MediaPipe 선택 근거
+- ✅ 앱 구조: 레이어드 아키텍처 (Hardware/Backend/Frontend/Database)
+- ✅ 개발 환경: Python, MQTT, Arduino 설정 과정
+- ✅ 빌드 & 배포: 개발 환경 실행과 프로덕션 배포 방식
+
+### 3. 개발자 기본소양 (10점)
+- ✅ 기술 상세: Python, Flask, MQTT, JavaScript, Arduino
+- ✅ 아키텍처 이해: 계층화, 관심사 분리, 확장성, 부하 분산
+- ✅ 시행착오: Arduino 통신, MQTT 안정성, MediaPipe 성능, DB 최적화
+- ✅ 개발환경: 구성 및 세팅 방법
+- ✅ 개선 의지: Docker, 마이크로서비스, 모바일 앱 계획
+- ✅ 성능 최적화: 캐싱, 인덱싱, 프레임 스킵, 이미지 압축
+- ✅ 코드 품질: PEP 8, 문서화, 에러 처리, Git 관리
+- ✅ 단위/통합 테스트: 각 계층별 테스트 전략
+- ✅ GitHub 가이드: 클론, 설치, 실행 방법 상세 기술
+
+## 🎬 발표 보기
+
+### 온라인 (GitHub Pages)
 ```
-presentation/
-├── index.html          # 메인 프레젠테이션 (Reveal.js 기반)
-├── assets/            # 이미지, 자료 등
-└── README.md          # 이 파일
+https://<github-username>.github.io/<repository-name>/presentation/
 ```
 
-## 사용 방법
+### 로컬 (개발 환경)
+1. 이 파일과 같은 디렉토리의 `index.html` 열기
+2. 브라우저에서 실행
 
-### 로컬에서 보기
+## ⌨️ 발표 조작법
+
+| 키 | 기능 |
+|----|------|
+| **Space** | 다음 슬라이드 |
+| **→/←** | 다음/이전 |
+| **F** | 전체화면 |
+| **S** | 발표자 보기 |
+| **Esc** | 슬라이드 맵 |
+| **?** | 도움말 |
+
+## 📝 슬라이드 구성
+
+### 발표 체계성 (10 슬라이드)
+1. **제목**: EcoMind 소개
+2. **비전**: 왜 필요한가?
+3. **WBS**: 프로젝트 구조
+4. **기술 스택**: 사용 기술
+5. **아키텍처**: 4계층 시스템
+6. **Backend**: 구현 상세
+7. **Frontend**: 주요 기능
+8. **진행**: 프로젝트 타임라인
+9. **활용**: 사용자별 활용 방안
+10. **통계**: 기대 효과
+
+### 질의응답 (4 슬라이드)
+11-13. **ADR**: 아키텍처 결정 (3가지)
+14. **앱 구조**: 디렉토리 및 레이어
+15. **개발환경**: 설정 과정
+16. **빌드/배포**: 실행 방법
+
+### 개발자 기본소양 (10 슬라이드)
+17. **기술 상세**: 각 기술 설명
+18. **아키텍처 이해**: 설계 원칙
+19. **시행착오**: 문제 해결 기록
+20. **지속적 개선**: 학습 및 계획
+21. **성능 최적화**: 개선 사항
+22. **코드 품질**: 관리 방식
+23. **테스트**: 단위/통합 테스트
+24. **GitHub 가이드**: 실행 가이드
+25. **결론**: 핵심 메시지
+26. **Q&A**: 질문 및 피드백
+
+## 🚀 GitHub Pages 배포
+
+### 사전 조건
+- Git 저장소 초기화됨
+- GitHub 계정 있음
+
+### 배포 단계
+
+1. **모든 파일 커밋**
 ```bash
-# Python 내장 서버 사용
-python -m http.server 8000
-
-# 또는 Node.js http-server 사용
-npx http-server
+git add presentation/
+git commit -m "feat: Add presentation slides for EcoMind"
 ```
 
-브라우저에서 `http://localhost:8000/presentation/` 접속
-
-### 키보드 단축키
-- **Space / 화살표** - 슬라이드 이동
-- **F** - 전체화면
-- **S** - 발표 모드
-- **Esc** - 슬라이드 맵 보기
-
-## 프레젠테이션 내용
-
-### 1️⃣ 프로젝트 비전 (Vision & Goals)
-- 프로젝트 개요
-- 핵심 가치
-- 기대 효과
-
-### 2️⃣ 시스템 아키텍처 (Architecture)
-- Hardware Layer (Arduino)
-  - 센서 구성 (진동, 조도, 초음파)
-  - 데이터 송신 (MQTT/Serial)
-  
-- Backend Layer (Python)
-  - API 서버
-  - 센서 서비스
-  - AI 서비스 (EXAONE)
-  - 데이터 서비스
-  
-- Frontend Layer (Web)
-  - 대시보드
-  - 통계 분석
-  - MediaPipe 포즈 감지
-  - Chart.js 시각화
-  
-- Database Layer
-  - 개발 환경 (H2)
-  - 프로덕션 (MySQL)
-
-### 3️⃣ WBS (Work Breakdown Structure)
-세부 작업 목록:
-1. Hardware Development
-2. Backend Development
-3. Frontend Development
-4. Database Design
-5. Integration & Testing
-
-### 4️⃣ 기술 스택
-- Hardware: Arduino, 센서
-- Backend: Python, REST API, EXAONE AI
-- Frontend: HTML/CSS/JS, Chart.js, MediaPipe
-- Database: H2, MySQL
-
-## GitHub Pages 배포
-
-### 1. 저장소 설정
+2. **GitHub에 푸시**
 ```bash
-# 로컬 저장소 초기화
-git init
-git add .
-git commit -m "Initial commit"
+git push origin main
 ```
 
-### 2. GitHub에 푸시
-```bash
-# GitHub에서 새 저장소 생성 후
-git remote add origin https://github.com/yourusername/concentration-system.git
-git branch -M main
-git push -u origin main
+3. **GitHub Pages 활성화**
+   - Repository Settings → Pages
+   - Branch: main, Folder: / (root)
+   - Save
+
+4. **5분 대기** (배포 완료)
+
+5. **확인**
+```
+https://<username>.github.io/<repo>/presentation/
 ```
 
-### 3. GitHub Pages 활성화
-1. GitHub 저장소 → Settings
-2. Pages 섹션에서:
-   - Source: Deploy from a branch
-   - Branch: main, / (root)
-3. Save
+## 📚 관련 문서
 
-### 4. 프레젠테이션 접속
-프레젠테이션은 다음 URL에서 접근 가능합니다:
-```
-https://yourusername.github.io/concentration-system/presentation/
-```
+- [README.md](../README.md) - 프로젝트 전체 소개
+- [ARCHITECTURE.md](../ARCHITECTURE.md) - 상세 아키텍처
+- [DEPLOY.md](../DEPLOY.md) - 배포 가이드
 
-## 프레젠테이션 커스터마이징
+## ✅ 발표 체크리스트
 
-### CSS 수정
-`index.html`의 `<style>` 섹션에서:
-- 색상: `#4DB8FF` (주요 파란색)
-- 폰트: `Segoe UI`
-- 배경: `black` 테마
+발표 전 확인사항:
 
-### 슬라이드 추가
-```html
-<section>
-    <h2>새로운 제목</h2>
-    <p>내용</p>
-</section>
-```
+- [ ] 모든 슬라이드 내용 확인
+- [ ] 기술 용어 정확성 검증
+- [ ] 이미지/다이어그램 로드 확인
+- [ ] 프로젝터에서 테스트
+- [ ] 발표자 노트 준비
+- [ ] 백업 PDF 준비
+- [ ] 인터넷 연결 확인 (CDN)
 
-### 테마 변경
-```html
-<!-- 다른 테마 사용 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/white.css">
-```
+## 🎓 발표 팁
 
-## 참고 자료
+1. **준비**
+   - 슬라이드 2-3회 리허설
+   - 기술 용어 미리 숙지
+   - 실제 데모 환경 테스트
 
-- [Reveal.js 공식 문서](https://revealjs.com/)
-- [GitHub Pages 가이드](https://pages.github.com/)
-- [프로젝트 아키텍처](../ARCHITECTURE.md)
-- [프로젝트 README](../README.md)
+2. **발표 중**
+   - S 키로 발표자 보기 (노트 확인)
+   - 청중과의 상호작용
+   - 시간 관리 (약 25분)
 
-## 라이센스
-프로젝트와 동일한 라이센스를 따릅니다.
+3. **핵심 메시지**
+   - "IoT + AI로 집중력 있는 삶"
+   - "실제 문제 해결"
+   - "지속적 개선"
+
+## 📞 문의
+
+발표 자료에 대한 질문이나 피드백:
+- GitHub Issues 생성
+- 이메일 연락
+
+---
+
+**마지막 업데이트**: 2026년 6월 15일
