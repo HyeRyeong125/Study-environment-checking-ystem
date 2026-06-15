@@ -3,6 +3,7 @@ import json
 import paho.mqtt.client as mqtt
 import threading
 import os
+import random
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -17,12 +18,18 @@ class SensorService:
         self.data_history = []
         self.lock = threading.Lock()
 
+        # Demo mode (배포 환경용)
+        self.demo_mode = os.getenv('DEMO_MODE', 'false').lower() == 'true'
+
         # MQTT Configuration
         self.mqtt_broker = os.getenv('MQTT_BROKER', 'localhost')
         self.mqtt_port = int(os.getenv('MQTT_PORT', 1883))
 
-        # Start MQTT connection in background thread
-        self.connect_mqtt()
+        # Start MQTT connection in background thread (데모 모드가 아닐 때만)
+        if not self.demo_mode:
+            self.connect_mqtt()
+        else:
+            print("[DEMO MODE] MQTT 연결 건너뜀")
 
     def connect_mqtt(self):
         """Connect to MQTT broker and subscribe to topics"""
@@ -107,6 +114,27 @@ class SensorService:
 
     def get_latest(self):
         """Get latest sensor data"""
+        # Demo mode: return simulated sensor data
+        if self.demo_mode:
+            return {
+                'timestamp': datetime.now().isoformat(),
+                'light_sensor': {
+                    'illuminance': random.uniform(200, 500),
+                    'raw_value': random.randint(200, 500),
+                    'timestamp': datetime.now().isoformat()
+                },
+                'microphone_sensor': {
+                    'noise_level': random.uniform(10, 60),
+                    'raw_value': random.randint(80, 480),
+                    'timestamp': datetime.now().isoformat()
+                },
+                'motion_sensor': {
+                    'detected': random.choice([True, False]),
+                    'raw_value': random.randint(30, 100),
+                    'timestamp': datetime.now().isoformat()
+                }
+            }
+
         with self.lock:
             if self.latest_data:
                 return {
@@ -118,16 +146,19 @@ class SensorService:
         return {
             'timestamp': datetime.now().isoformat(),
             'motion_sensor': {
-                'noise_level': 0,
-                'raw_value': 0
+                'detected': False,
+                'raw_value': 0,
+                'timestamp': datetime.now().isoformat()
             },
             'light_sensor': {
                 'illuminance': 0,
-                'raw_value': 0
+                'raw_value': 0,
+                'timestamp': datetime.now().isoformat()
             },
             'microphone_sensor': {
                 'noise_level': 0,
-                'raw_value': 0
+                'raw_value': 0,
+                'timestamp': datetime.now().isoformat()
             }
         }
 

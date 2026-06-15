@@ -29,7 +29,7 @@ app.register_blueprint(api_bp, url_prefix='/api')
 
 @app.route('/')
 def serve_index():
-    return send_from_directory(app.static_folder, 'index.html')
+    return send_from_directory(app.static_folder, 'presentation.html')
 
 @app.errorhandler(404)
 def not_found(error):
