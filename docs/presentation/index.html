@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoMind - 집중력 강화 시스템</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6FB3D2;
+            --primary-light: #A8D5E2;
+            --accent: #5AA0C4;
+            --bg: #FFFFFF;
+            --text: #1a1a1a;
+            --text-dark: #2c3e50;
+            --text-muted: #5E7A8C;
+            --border: #C5E0F0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            font-weight: 400;
+            line-height: 1.7;
+        }
+
+        /* ---------- 상단 고정 네비게이션 ---------- */
+        .topnav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 2px solid var(--primary-light);
+        }
+        .topnav-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0.8em 1.5em;
+            display: flex;
+            align-items: center;
+            gap: 1.5em;
+            flex-wrap: wrap;
+        }
+        .topnav .brand {
+            font-size: 1.25em;
+            font-weight: 800;
+            color: var(--text-dark);
+            white-space: nowrap;
+        }
+        .topnav .brand .leaf { color: var(--primary); }
+        .topnav nav {
+            display: flex;
+            gap: 1.1em;
+            flex-wrap: wrap;
+            font-size: 0.92em;
+        }
+        .topnav nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.15s;
+        }
+        .topnav nav a:hover { color: var(--accent); }
+
+        /* ---------- 페이지 컨테이너 ---------- */
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 1.5em;
+        }
+
+        /* ---------- 섹션 ---------- */
+        section.block {
+            padding: 50px 0;
+            border-bottom: 1px solid #e8eef2;
+        }
+        section.block:last-of-type { border-bottom: none; }
+
+        .kicker {
+            display: inline-block;
+            font-size: 0.85em;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 0.6em;
+        }
+
+        h2.section-title {
+            font-size: 2em;
+            font-weight: 800;
+            color: var(--text);
+            line-height: 1.3;
+            margin-bottom: 0.7em;
+            letter-spacing: -0.01em;
+        }
+
+        section.block p,
+        section.block li {
+            font-size: 1.15em;
+            line-height: 1.85;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        strong { color: var(--text); font-weight: 700; }
+        .muted { color: var(--text-muted); }
+        .accent { color: var(--accent); font-weight: 700; }
+        .primary { color: var(--primary); font-weight: 700; }
+
+        /* ---------- 타이틀 배너 ---------- */
+        .hero {
+            text-align: center;
+            padding: 90px 1.5em 70px;
+            border-bottom: 1px solid #e8eef2;
+        }
+        .hero .logo { font-size: 4em; margin-bottom: 0.1em; }
+        .hero h1 {
+            font-size: 3.4em;
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+        .hero .accent-line {
+            width: 70px; height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+            margin: 1em auto;
+        }
+        .hero .subtitle {
+            font-size: 1.3em;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-top: 0.3em;
+        }
+        .hero .meta {
+            color: var(--text-muted);
+            font-size: 1em;
+            margin-top: 0.8em;
+        }
+
+        /* ---------- 카드 ---------- */
+        .card {
+            border: 1px solid #ddd;
+            border-left: 4px solid var(--primary);
+            border-radius: 10px;
+            padding: 1.1em 1.4em;
+            margin: 0.9em 0;
+        }
+        .card.accent-card { border-left-color: var(--accent); }
+        .card h4 {
+            font-size: 1.15em;
+            color: var(--text);
+            margin-bottom: 0.3em;
+            font-weight: 700;
+        }
+        .card p { margin: 0; color: #333; font-size: 1.05em; font-weight: 500; }
+
+        /* ---------- 그리드 ---------- */
+        .grid {
+            display: grid;
+            gap: 1.1em;
+            margin-top: 0.5em;
+        }
+        .grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+        .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+
+        .tile {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 1.3em 1.4em;
+        }
+        .tile .ico { font-size: 2em; display: block; margin-bottom: 0.3em; }
+        .tile h4 { font-size: 1.15em; color: var(--text); margin-bottom: 0.3em; font-weight: 700; }
+        .tile p { margin: 0; font-size: 1.02em; color: #333; line-height: 1.7; font-weight: 500; }
+
+        /* ---------- 깔끔한 리스트 ---------- */
+        ul.clean { list-style: none; padding: 0; margin: 0.6em 0; }
+        ul.clean li {
+            position: relative;
+            padding-left: 1.8em;
+            margin: 1em 0;
+            font-size: 1.18em;
+            font-weight: 500;
+            color: var(--text);
+        }
+        ul.clean li::before {
+            content: "●";
+            position: absolute;
+            left: 0; top: 0.35em;
+            font-size: 0.7em;
+            color: var(--primary);
+        }
+
+        /* ---------- 기술 스택 ---------- */
+        .stack-cat {
+            border: 1px solid #ddd;
+            border-top: 4px solid var(--primary);
+            border-radius: 8px;
+            padding: 1.2em 1.3em;
+        }
+        .stack-cat h4 { font-size: 1.15em; color: var(--text); margin-bottom: 0.6em; font-weight: 700; }
+        .stack-cat ul { list-style: none; padding: 0; margin: 0; }
+        .stack-cat li { font-size: 1.05em; color: #333; margin: 0.45em 0; font-weight: 500; }
+
+        /* ---------- 아키텍처 다이어그램 ---------- */
+        .arch { max-width: 600px; margin: 1em auto; }
+        .arch-layer {
+            border-radius: 10px;
+            padding: 1em 1.2em;
+            text-align: center;
+            border: 2px solid var(--primary);
+            background: rgba(168, 213, 226, 0.18);
+        }
+        .arch-layer strong { color: var(--accent); font-size: 1.15em; }
+        .arch-layer span { display: block; font-size: 0.95em; color: var(--text-muted); margin-top: 0.2em; font-weight: 500; }
+        .arch-arrow {
+            text-align: center;
+            color: var(--primary);
+            font-size: 1em;
+            font-weight: 600;
+            margin: 0.5em 0;
+            letter-spacing: 0.05em;
+        }
+
+        /* ---------- 타임라인 ---------- */
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin: 2em 0 1.5em;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 12px; left: 8%; right: 8%;
+            height: 3px;
+            background: var(--border);
+            z-index: 0;
+        }
+        .tl-item { flex: 1; text-align: center; position: relative; z-index: 1; }
+        .tl-dot {
+            width: 26px; height: 26px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 4px solid #fff;
+            box-shadow: 0 0 0 2px var(--accent);
+            margin: 0 auto 0.7em;
+        }
+        .tl-item strong { display: block; font-size: 1em; color: var(--text); }
+        .tl-item span { font-size: 0.9em; color: var(--text-muted); font-weight: 500; }
+
+        /* ---------- 코드 블록 ---------- */
+        .code {
+            background: #1F2430;
+            color: #E6EAF2;
+            border-radius: 10px;
+            padding: 1.3em 1.5em;
+            font-family: 'SF Mono', 'Consolas', monospace;
+            font-size: 0.98em;
+            line-height: 1.65;
+            text-align: left;
+            white-space: pre;
+            overflow-x: auto;
+            margin: 0.8em 0;
+        }
+        .code .cmt { color: #7E879A; }
+        .code .dir { color: #8FD3F0; }
+
+        /* ---------- 배너 ---------- */
+        .banner {
+            background: linear-gradient(135deg, #D4EBFF 0%, #A8D5E2 100%);
+            color: var(--text-dark);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.2em 1.5em;
+            text-align: center;
+            margin-top: 1.3em;
+        }
+        .banner strong { color: var(--accent); font-size: 1.2em; }
+        .banner p { color: var(--text-dark); margin: 0.3em 0 0; font-size: 1.05em; }
+
+        .subhead {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 1.2em 0 0.4em;
+        }
+
+        /* ---------- 마무리 / Q&A ---------- */
+        .closing {
+            text-align: center;
+            padding: 80px 1.5em;
+            border-top: 1px solid #e8eef2;
+        }
+        .closing .logo { font-size: 3.5em; margin-bottom: 0.1em; }
+        .closing h1 { font-size: 2.8em; font-weight: 800; color: var(--text); }
+        .closing .accent-line {
+            width: 70px; height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+            margin: 1em auto;
+        }
+        .closing .subtitle { font-size: 1.3em; font-weight: 500; color: var(--text-dark); }
+        .closing .meta { color: var(--text-muted); font-size: 1em; margin-top: 0.8em; }
+
+        /* ---------- 반응형 ---------- */
+        @media (max-width: 720px) {
+            .grid.cols-2, .grid.cols-3 { grid-template-columns: 1fr; }
+            h2.section-title { font-size: 1.6em; }
+            .hero h1 { font-size: 2.4em; }
+            .hero .subtitle { font-size: 1.1em; }
+            section.block p, section.block li { font-size: 1.05em; }
+            .timeline { flex-wrap: wrap; gap: 1em; }
+            .timeline::before { display: none; }
+            .tl-item { flex: 1 1 40%; }
+            .topnav nav { font-size: 0.82em; gap: 0.7em; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== 상단 고정 네비게이션 ==================== -->
+    <header class="topnav">
+        <div class="topnav-inner">
+            <span class="brand"><span class="leaf">🌿</span> EcoMind</span>
+            <nav>
+                <a href="#vision">비전</a>
+                <a href="#wbs">WBS</a>
+                <a href="#stack">기술 스택</a>
+                <a href="#arch">아키텍처</a>
+                <a href="#impl">구현</a>
+                <a href="#process">진행</a>
+                <a href="#adr">ADR</a>
+                <a href="#fundamentals">기술 상세</a>
+                <a href="#guide">설치</a>
+                <a href="#qa">Q&amp;A</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ==================== 1. 타이틀 ==================== -->
+    <section class="hero" id="top">
+        <div class="logo">🌿</div>
+        <h1>EcoMind</h1>
+        <div class="accent-line"></div>
+        <div class="subtitle">IoT 센서 &amp; AI 기반 집중력 강화 시스템</div>
+        <div class="meta">개발자 HyeRyeong125 · 2026년 6월</div>
+    </section>
+
+    <div class="container">
+
+        <!-- ==================== 2. 비전: 문제 ==================== -->
+        <section class="block" id="vision">
+            <span class="kicker">Vision · 문제 인식</span>
+            <h2 class="section-title">왜 이 프로젝트가 필요한가?</h2>
+            <ul class="clean">
+                <li>학생·직장인의 <span class="accent">산만한 학습/업무 환경</span></li>
+                <li>자신의 <span class="accent">집중 패턴</span>을 파악하기 어려움</li>
+                <li>조명·소음이 집중력에 미치는 <span class="accent">영향 미파악</span></li>
+                <li>개인화된 <span class="accent">맞춤형 조언</span>의 부재</li>
+            </ul>
+        </section>
+
+        <!-- ==================== 3. 비전: 가치 ==================== -->
+        <section class="block">
+            <span class="kicker">Vision · 제시 가치</span>
+            <h2 class="section-title">EcoMind가 제공하는 것</h2>
+            <div class="grid cols-2">
+                <div class="tile"><span class="ico">📡</span><h4>실시간 집중도 분석</h4><p>센서 + 웹캠으로 집중 상태 측정</p></div>
+                <div class="tile"><span class="ico">💡</span><h4>환경 최적화 제안</h4><p>조명·소음 기반 개선 가이드</p></div>
+                <div class="tile"><span class="ico">🤖</span><h4>AI 개인화 추천</h4><p>EXAONE 기반 맞춤형 조언</p></div>
+                <div class="tile"><span class="ico">📊</span><h4>통계 기반 자기관리</h4><p>추이 분석으로 습관 개선</p></div>
+            </div>
+        </section>
+
+        <!-- ==================== 4. WBS ==================== -->
+        <section class="block" id="wbs">
+            <span class="kicker">Structure · WBS</span>
+            <h2 class="section-title">작업 분류 체계 (4계층)</h2>
+            <div class="grid cols-2">
+                <div class="card"><h4>1 · Hardware</h4><p>Arduino 센서 수집 — 조도(lux), 소음(dB), 동작 감지</p></div>
+                <div class="card"><h4>2 · Backend</h4><p>Python/Flask — 데이터 처리, REST API, AI 통합</p></div>
+                <div class="card"><h4>3 · Frontend</h4><p>웹 대시보드 — 모니터링, 통계, 포모도로</p></div>
+                <div class="card"><h4>4 · Database</h4><p>데이터 저장 — H2(개발) / MySQL(프로덕션)</p></div>
+            </div>
+        </section>
+
+        <!-- ==================== 5. 기술 스택 ==================== -->
+        <section class="block" id="stack">
+            <span class="kicker">Structure · Tech Stack</span>
+            <h2 class="section-title">적용 기술</h2>
+            <div class="grid cols-2">
+                <div class="stack-cat">
+                    <h4>🔧 Backend</h4>
+                    <ul><li>Python 3.8+</li><li>Flask · REST API</li><li>MQTT · 센서 통신</li><li>PySerial</li></ul>
+                </div>
+                <div class="stack-cat">
+                    <h4>🎨 Frontend</h4>
+                    <ul><li>HTML5 / CSS3</li><li>Vanilla JS</li><li>MediaPipe · 얼굴 인식</li><li>Chart.js</li></ul>
+                </div>
+                <div class="stack-cat">
+                    <h4>🔌 Hardware</h4>
+                    <ul><li>Arduino Uno</li><li>CdS 포토레지스터</li><li>마이크 · 모션 센서</li></ul>
+                </div>
+                <div class="stack-cat">
+                    <h4>🌐 External</h4>
+                    <ul><li>EXAONE AI</li><li>Mosquitto MQTT</li><li>MySQL</li></ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 6. 아키텍처 ==================== -->
+        <section class="block" id="arch">
+            <span class="kicker">Structure · Architecture</span>
+            <h2 class="section-title">시스템 아키텍처</h2>
+            <div class="arch">
+                <div class="arch-layer"><strong>Hardware Layer</strong><span>Arduino + Sensors</span></div>
+                <div class="arch-arrow">↓  MQTT / Serial  ↓</div>
+                <div class="arch-layer"><strong>Backend Layer</strong><span>Flask API + Services</span></div>
+                <div class="arch-arrow">↓  REST API  ↓</div>
+                <div class="arch-layer"><strong>Frontend Layer</strong><span>Web Dashboard + Charts</span></div>
+                <div class="arch-arrow">↕  Database  ↕</div>
+                <div class="arch-layer"><strong>Database Layer</strong><span>H2 (Dev) / MySQL (Prod)</span></div>
+            </div>
+        </section>
+
+        <!-- ==================== 7. Backend 구현 ==================== -->
+        <section class="block" id="impl">
+            <span class="kicker">Implementation · Backend</span>
+            <h2 class="section-title">Backend 구현 상세</h2>
+            <div class="grid cols-2">
+                <div class="card"><h4>① 센서 데이터 수집</h4><p>sensor_service.py — MQTT 수신 데이터 처리</p></div>
+                <div class="card"><h4>② 데이터 분석</h4><p>data_service.py — 통계 계산</p></div>
+                <div class="card"><h4>③ AI 통합</h4><p>ai_service.py — EXAONE 개인화 조언</p></div>
+                <div class="card"><h4>④ REST API</h4><p>routes.py — 프론트엔드 통신 엔드포인트</p></div>
+            </div>
+        </section>
+
+        <!-- ==================== 8. Frontend 기능 ==================== -->
+        <section class="block">
+            <span class="kicker">Implementation · Frontend</span>
+            <h2 class="section-title">Frontend 주요 기능</h2>
+            <div class="grid cols-2">
+                <div class="tile"><span class="ico">📊</span><h4>대시보드</h4><p>실시간 센서 + 웹캠 집중도 분석</p></div>
+                <div class="tile"><span class="ico">⏱️</span><h4>포모도로</h4><p>25분 집중 / 5분 휴식 타이머</p></div>
+                <div class="tile"><span class="ico">📈</span><h4>통계</h4><p>주간·월간 집중도 추이 차트</p></div>
+                <div class="tile"><span class="ico">🤖</span><h4>AI 조언</h4><p>EXAONE 기반 개인화 추천</p></div>
+            </div>
+        </section>
+
+        <!-- ==================== 9. 프로젝트 진행 ==================== -->
+        <section class="block" id="process">
+            <span class="kicker">Process · Timeline</span>
+            <h2 class="section-title">프로젝트 진행 및 완료</h2>
+            <div class="timeline">
+                <div class="tl-item"><div class="tl-dot"></div><strong>Phase 1</strong><span>설계·기획</span></div>
+                <div class="tl-item"><div class="tl-dot"></div><strong>Phase 2</strong><span>Hardware</span></div>
+                <div class="tl-item"><div class="tl-dot"></div><strong>Phase 3</strong><span>Backend</span></div>
+                <div class="tl-item"><div class="tl-dot"></div><strong>Phase 4</strong><span>Frontend</span></div>
+                <div class="tl-item"><div class="tl-dot"></div><strong>Phase 5</strong><span>테스트·배포</span></div>
+            </div>
+            <div class="banner"><strong>✓ 모든 단계 완료</strong><p>프로덕션 배포 가능 상태</p></div>
+        </section>
+
+        <!-- ==================== 10. 활용 방안 ==================== -->
+        <section class="block">
+            <span class="kicker">Application · Use Cases</span>
+            <h2 class="section-title">어떻게 활용할 것인가?</h2>
+            <div class="grid cols-2">
+                <div class="tile"><span class="ico">🎓</span><h4>학생</h4><p>공부 환경 최적화로 학습 효율 증대</p></div>
+                <div class="tile"><span class="ico">💼</span><h4>직장인</h4><p>업무 환경 개선으로 생산성 향상</p></div>
+                <div class="tile"><span class="ico">🏢</span><h4>기업</h4><p>직원 웰빙·생산성 관리 도구</p></div>
+                <div class="tile"><span class="ico">🏫</span><h4>교육기관</h4><p>학습 환경 품질 모니터링</p></div>
+            </div>
+            <div class="banner"><strong>기대 효과</strong><p>집중력 향상 → 시간 효율 증가 → 역량 강화 → 생산성 향상</p></div>
+        </section>
+
+        <!-- ==================== 11. ADR 개요 ==================== -->
+        <section class="block" id="adr">
+            <span class="kicker">Q&amp;A · ADR</span>
+            <h2 class="section-title">아키텍처 결정 기록</h2>
+            <div class="grid cols-3">
+                <div class="tile"><h4>ADR-001</h4><p>MQTT 센서 브로커 채택</p></div>
+                <div class="tile"><h4>ADR-002</h4><p>Flask REST API 서버</p></div>
+                <div class="tile"><h4>ADR-003</h4><p>MediaPipe 얼굴 인식</p></div>
+            </div>
+            <p class="muted" style="margin-top:1em;">세 가지 핵심 기술 결정의 배경과 근거를 아래에서 설명합니다.</p>
+        </section>
+
+        <!-- ==================== 12. ADR-001 ==================== -->
+        <section class="block">
+            <span class="kicker">Q&amp;A · ADR-001</span>
+            <h2 class="section-title">MQTT를 센서 데이터 브로커로</h2>
+            <div class="card"><h4>상황</h4><p>여러 센서 데이터를 효율적으로 Backend로 전송 필요</p></div>
+            <div class="card"><h4>결정</h4><p>MQTT Broker (Mosquitto) 도입</p></div>
+            <div class="card"><h4>근거</h4><p>낮은 대역폭 · 발행-구독 모델 · 높은 신뢰성 · IoT 표준</p></div>
+            <div class="card accent-card"><h4>결과 ✓</h4><p>안정적인 실시간 센서 데이터 전송 확보</p></div>
+        </section>
+
+        <!-- ==================== 13. ADR-002 ==================== -->
+        <section class="block">
+            <span class="kicker">Q&amp;A · ADR-002</span>
+            <h2 class="section-title">Flask를 REST API 서버로</h2>
+            <div class="card"><h4>상황</h4><p>경량 Python 프레임워크로 REST API 구현 필요</p></div>
+            <div class="card"><h4>결정</h4><p>Flask 프레임워크 선택</p></div>
+            <div class="card"><h4>근거</h4><p>낮은 학습곡선 · 높은 확장성 · 마이크로서비스 적합 · 활발한 커뮤니티</p></div>
+            <div class="card accent-card"><h4>결과 ✓</h4><p>빠른 API 개발 및 유지보수 용이</p></div>
+        </section>
+
+        <!-- ==================== 14. ADR-003 ==================== -->
+        <section class="block">
+            <span class="kicker">Q&amp;A · ADR-003</span>
+            <h2 class="section-title">MediaPipe를 얼굴 인식 솔루션으로</h2>
+            <div class="card"><h4>상황</h4><p>웹브라우저에서 실시간 얼굴 인식·포즈 분석 필요</p></div>
+            <div class="card"><h4>결정</h4><p>Google MediaPipe 라이브러리 선택</p></div>
+            <div class="card"><h4>근거</h4><p>클라이언트 처리 · 빠른 성능 · 무료 · 웹 지원 · 높은 정확도</p></div>
+            <div class="card accent-card"><h4>결과 ✓</h4><p>개인정보 보호 + 빠른 응답시간 달성</p></div>
+        </section>
+
+        <!-- ==================== 15. 앱 구조 ==================== -->
+        <section class="block">
+            <span class="kicker">Q&amp;A · Structure</span>
+            <h2 class="section-title">앱의 디렉토리 구조</h2>
+<div class="code">앱프_프젝/
+├── <span class="dir">backend/</span>              <span class="cmt"># Python Flask 서버</span>
+│   ├── app/services/     <span class="cmt"># 비즈니스 로직</span>
+│   │     sensor_service · ai_service · data_service
+│   ├── app/api/routes.py <span class="cmt"># REST API</span>
+│   ├── main.py           <span class="cmt"># 진입점</span>
+│   └── arduino_gateway.py<span class="cmt"># 시리얼 통신</span>
+├── <span class="dir">frontend/</span>             <span class="cmt"># 웹 대시보드</span>
+│   └── src/ (pages · css · js)
+└── <span class="dir">arduino/</span>              <span class="cmt"># 펌웨어</span>
+      sensor_sketch.ino</div>
+        </section>
+
+        <!-- ==================== 16. 개발 환경 ==================== -->
+        <section class="block">
+            <span class="kicker">Q&amp;A · Setup</span>
+            <h2 class="section-title">개발 환경 설정</h2>
+            <div class="grid cols-2">
+                <div class="card"><h4>① Python 환경</h4><p>cd backend &nbsp;→&nbsp; pip install -r requirements.txt</p></div>
+                <div class="card"><h4>② MQTT 브로커</h4><p>brew install mosquitto &nbsp;→&nbsp; mosquitto 실행</p></div>
+                <div class="card"><h4>③ Arduino</h4><p>Arduino IDE에서 sensor_sketch.ino 업로드</p></div>
+                <div class="card"><h4>④ 환경 변수</h4><p>.env — 시리얼 포트, MQTT 브로커, PORT 설정</p></div>
+            </div>
+        </section>
+
+        <!-- ==================== 17. 빌드 & 배포 ==================== -->
+        <section class="block">
+            <span class="kicker">Q&amp;A · Build &amp; Deploy</span>
+            <h2 class="section-title">빌드와 배포</h2>
+            <div class="subhead">개발 환경 실행</div>
+<div class="code"><span class="cmt"># 터미널 3개</span>
+mosquitto
+python arduino_gateway.py
+python main.py        <span class="cmt"># → localhost:3000</span></div>
+            <div class="subhead">프로덕션 배포</div>
+            <ul class="clean">
+                <li><strong>빌드</strong> — 의존성 설치 + 테스트 완료</li>
+                <li><strong>배포</strong> — GitHub Pages(정적) + Flask(동적)</li>
+                <li><strong>모니터링</strong> — 로그 기반 문제 추적</li>
+            </ul>
+        </section>
+
+        <!-- ==================== 18. 기술 상세 ==================== -->
+        <section class="block" id="fundamentals">
+            <span class="kicker">Fundamentals · Tech</span>
+            <h2 class="section-title">기술 상세 설명</h2>
+            <div class="grid cols-2">
+                <div class="card"><h4>Python &amp; Flask</h4><p>RESTful API, 비동기 처리, 미들웨어 패턴</p></div>
+                <div class="card"><h4>MQTT (Mosquitto)</h4><p>Pub/Sub 메시징, QoS, 토픽 라우팅</p></div>
+                <div class="card"><h4>JS &amp; MediaPipe</h4><p>얼굴 인식, Canvas 시각화, Fetch API</p></div>
+                <div class="card"><h4>Arduino &amp; Serial</h4><p>센서 읽기, ADC 변환, 시리얼 프로토콜</p></div>
+            </div>
+        </section>
+
+        <!-- ==================== 19. 아키텍처 이해 ==================== -->
+        <section class="block">
+            <span class="kicker">Fundamentals · Principles</span>
+            <h2 class="section-title">설계 원칙</h2>
+            <div class="grid cols-2">
+                <div class="card"><h4>계층화 아키텍처</h4><p>독립적 계층으로 변경 영향 최소화</p></div>
+                <div class="card"><h4>관심사 분리 (SoC)</h4><p>services/, api/로 로직과 API 분리</p></div>
+                <div class="card"><h4>확장성</h4><p>새 센서 추가 시 수정 최소화</p></div>
+                <div class="card"><h4>부하 분산</h4><p>MQTT 데이터 분산, 정적 Frontend</p></div>
+            </div>
+        </section>
+
+        <!-- ==================== 20. 시행착오 ==================== -->
+        <section class="block">
+            <span class="kicker">Fundamentals · Troubleshooting</span>
+            <h2 class="section-title">겪은 문제와 해결</h2>
+            <div class="grid cols-2">
+                <div class="card accent-card"><h4>Arduino 통신 불안정</h4><p>PySerial 재시도 로직 구현</p></div>
+                <div class="card accent-card"><h4>MQTT 메시지 손실</h4><p>QoS 1 설정 + 재연결 정책</p></div>
+                <div class="card accent-card"><h4>MediaPipe 성능 저하</h4><p>프레임 스킵 + 해상도 조정</p></div>
+                <div class="card accent-card"><h4>DB 성능 저하</h4><p>인덱싱 추가 + 쿼리 최적화</p></div>
+            </div>
+        </section>
+
+        <!-- ==================== 21. 지속적 개선 ==================== -->
+        <section class="block">
+            <span class="kicker">Fundamentals · Growth</span>
+            <h2 class="section-title">지속적인 기술 습득</h2>
+            <div class="grid cols-2">
+                <div class="card"><h4>학습한 기술</h4><p>IoT 프로토콜 · AI/ML 통합 · 실시간 처리</p></div>
+                <div class="card"><h4>개선 계획</h4><p>Docker 배포 · 마이크로서비스 · 모바일 앱</p></div>
+                <div class="card"><h4>버전 관리</h4><p>Git 기반 · 시맨틱 버전 · 릴리즈 노트</p></div>
+                <div class="card"><h4>커뮤니티</h4><p>GitHub · 기술 블로그 · 피드백</p></div>
+            </div>
+        </section>
+
+        <!-- ==================== 22. 성능 최적화 ==================== -->
+        <section class="block">
+            <span class="kicker">Fundamentals · Performance</span>
+            <h2 class="section-title">성능 최적화</h2>
+            <div class="grid cols-2">
+                <div class="card"><h4>프론트엔드</h4><p>MediaPipe 프레임 스킵, Canvas 렌더 최적화</p></div>
+                <div class="card"><h4>백엔드</h4><p>비동기 처리, 응답 캐싱</p></div>
+                <div class="card"><h4>데이터베이스</h4><p>인덱싱, 쿼리 튜닝으로 조회 속도 개선</p></div>
+                <div class="card"><h4>통신</h4><p>MQTT QoS 조정으로 대역폭 효율화</p></div>
+            </div>
+        </section>
+
+        <!-- ==================== 23. 코드 품질 ==================== -->
+        <section class="block">
+            <span class="kicker">Fundamentals · Quality</span>
+            <h2 class="section-title">코드 품질</h2>
+            <div class="grid cols-2">
+                <div class="card"><h4>코드 스타일</h4><p>PEP 8 준수, 일관된 네이밍</p></div>
+                <div class="card"><h4>문서화</h4><p>docstring, README, 다이어그램</p></div>
+                <div class="card"><h4>모듈화</h4><p>services/, api/ 분리로 응집도 향상</p></div>
+                <div class="card"><h4>코드 리뷰</h4><p>PR 기반 리뷰로 품질 유지</p></div>
+            </div>
+        </section>
+
+        <!-- ==================== 24. 테스트 ==================== -->
+        <section class="block">
+            <span class="kicker">Fundamentals · Test</span>
+            <h2 class="section-title">테스트</h2>
+            <div class="grid cols-2">
+                <div class="card"><h4>단위 테스트</h4><p>sensor · data · ai 서비스 검증</p></div>
+                <div class="card"><h4>통합 테스트</h4><p>Arduino→MQTT→Backend→DB→API 흐름</p></div>
+            </div>
+            <div class="banner"><strong>테스트 커버리지</strong><p>핵심 로직 80% 이상 · 지속적 개선</p></div>
+        </section>
+
+        <!-- ==================== 25. GitHub 가이드 ==================== -->
+        <section class="block" id="guide">
+            <span class="kicker">Q&amp;A · Quick Start</span>
+            <h2 class="section-title">설치 및 실행 가이드</h2>
+<div class="code"><span class="cmt"># 1. 클론</span>
+git clone .../Study-environment-checking-system.git
+
+<span class="cmt"># 2. 의존성</span>
+cd backend && pip install -r requirements.txt
+
+<span class="cmt"># 3. 환경 설정</span>
+cp .env.example .env   <span class="cmt"># 포트 등 수정</span>
+
+<span class="cmt"># 4. 실행</span>
+mosquitto & python arduino_gateway.py & python main.py
+<span class="cmt"># → http://localhost:3000</span></div>
+        </section>
+
+        <!-- ==================== 26. 결론 ==================== -->
+        <section class="block">
+            <span class="kicker">Conclusion</span>
+            <h2 class="section-title">결론</h2>
+            <p>EcoMind는 IoT 센서와 AI를 결합하여 <strong>실시간 집중도 모니터링</strong>, <strong>개인화 분석</strong>, <strong>AI 조언</strong>을 제공하는 집중력 강화 시스템입니다.</p>
+            <div class="banner"><strong>IoT + AI로 만드는 집중력 있는 삶</strong><p>실시간 모니터링 · 개인화 분석 · AI 조언 · 효율 증대</p></div>
+        </section>
+
+    </div>
+
+    <!-- ==================== 27. Q&A / 마무리 ==================== -->
+    <section class="closing" id="qa">
+        <div class="logo">❓</div>
+        <h1>질문 &amp; 피드백</h1>
+        <div class="accent-line"></div>
+        <div class="subtitle">감사합니다!</div>
+        <div class="meta">GitHub Issues를 통해 피드백을 받습니다. · HyeRyeong125</div>
+    </section>
+
+</body>
+</html>
