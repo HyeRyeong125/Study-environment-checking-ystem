@@ -23,22 +23,22 @@ class AIService:
             'recommendations': [
                 {
                     'category': 'time_management',
-                    'advice': 'Your focus quality peaks at 10:00 AM. Schedule important tasks then.',
+                    'advice': '아침 10시경에 집중도가 가장 높습니다. 중요한 작업을 이 시간에 집중하세요.',
                     'confidence': 0.92
                 },
                 {
                     'category': 'environment',
-                    'advice': 'Increase ambient light to 400 lux for 15% better focus.',
+                    'advice': '주변 조명을 400룩스 이상으로 증가시키면 집중력이 15% 향상됩니다.',
                     'confidence': 0.85
                 },
                 {
                     'category': 'posture',
-                    'advice': 'Maintain straight posture. Poor posture reduces focus by 12%.',
+                    'advice': '바른 자세를 유지하세요. 나쁜 자세는 집중력을 12% 감소시킵니다.',
                     'confidence': 0.78
                 },
                 {
                     'category': 'breaks',
-                    'advice': 'Take 5-minute breaks every 45 minutes for sustained focus.',
+                    'advice': '45분마다 5분씩 휴식을 취하면 지속적인 집중력을 유지할 수 있습니다.',
                     'confidence': 0.88
                 }
             ],

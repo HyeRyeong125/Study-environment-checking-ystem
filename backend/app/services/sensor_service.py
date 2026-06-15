@@ -53,8 +53,7 @@ class SensorService:
             topics = [
                 'home/sensors/light',
                 'home/sensors/motion',
-                'home/sensors/microphone',
-                'home/sensors/ultrasonic'
+                'home/sensors/microphone'
             ]
             for topic in topics:
                 client.subscribe(topic)
@@ -77,8 +76,6 @@ class SensorService:
                     self.latest_data['motion_sensor'] = payload
                 elif 'microphone' in topic:
                     self.latest_data['microphone_sensor'] = payload
-                elif 'ultrasonic' in topic:
-                    self.latest_data['ultrasonic_sensor'] = payload
 
                 # Add timestamp if not present
                 if 'timestamp' not in self.latest_data:
@@ -131,10 +128,6 @@ class SensorService:
             'microphone_sensor': {
                 'noise_level': 0,
                 'raw_value': 0
-            },
-            'ultrasonic_sensor': {
-                'distance': -1,
-                'posture': 'unknown'
             }
         }
 
@@ -180,7 +173,6 @@ class SensorService:
 
             light_values = []
             noise_values = []
-            distance_values = []
 
             for record in self.data_history:
                 data = record.get('data', {})
@@ -188,8 +180,6 @@ class SensorService:
                     light_values.append(data['illuminance'])
                 if 'noise_level' in data:
                     noise_values.append(data['noise_level'])
-                if 'distance' in data and data['distance'] > 0:
-                    distance_values.append(data['distance'])
 
             return {
                 'motion_sensor': {
@@ -202,11 +192,6 @@ class SensorService:
                     'min_illuminance': min(light_values) if light_values else 0,
                     'max_illuminance': max(light_values) if light_values else 0,
                     'data_points': len(light_values)
-                },
-                'ultrasonic_sensor': {
-                    'avg_distance': sum(distance_values) / len(distance_values) if distance_values else 0,
-                    'max_distance': max(distance_values) if distance_values else 0,
-                    'data_points': len(distance_values)
                 }
             }
 

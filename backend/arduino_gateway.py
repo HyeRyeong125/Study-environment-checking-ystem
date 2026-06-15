@@ -27,8 +27,7 @@ MQTT_PASSWORD = os.getenv('MQTT_PASSWORD', None)
 TOPICS = {
     'light': 'home/sensors/light',
     'vibration': 'home/sensors/motion',
-    'microphone': 'home/sensors/microphone',
-    'ultrasonic': 'home/sensors/ultrasonic'
+    'microphone': 'home/sensors/microphone'
 }
 
 
@@ -102,19 +101,13 @@ class ArduinoGateway:
             # ADC to proper unit conversion
             raw_light = raw_data.get('light', 0)
             raw_microphone = raw_data.get('microphone', 0)
-            raw_distance = raw_data.get('distance', -1)
 
             # Convert ADC light value (0-1023) to estimated lux (0-1000)
-            light_lux = max(0, (raw_light / 1023.0) * 1000)
+            # Note: Light sensor is inverse (high ADC = low light)
+            light_lux = max(0, ((1023 - raw_light) / 1023.0) * 1000)
 
             # Convert ADC microphone value (0-1023) to dB (0-120)
             microphone_db = max(0, (raw_microphone / 1023.0) * 120)
-
-            # Transform ultrasonic distance
-            if raw_distance > 0:
-                test_distance = max(0, 400 - raw_distance)
-            else:
-                test_distance = -1
 
             sensor_data = {
                 'light_sensor': {
@@ -128,10 +121,6 @@ class ArduinoGateway:
                 'microphone_sensor': {
                     'noise_level': microphone_db,
                     'raw_value': raw_microphone
-                },
-                'ultrasonic_sensor': {
-                    'distance': test_distance,
-                    'posture': 'warning' if test_distance < 25 else 'good' if test_distance > 0 else 'unknown'
                 }
             }
 
@@ -173,20 +162,6 @@ class ArduinoGateway:
             )
             print(f"🔊 Noise: {microphone_payload['noise_level']}")
 
-            # Publish ultrasonic sensor data
-            ultrasonic_payload = {
-                'timestamp': timestamp,
-                'distance': sensor_data['ultrasonic_sensor']['distance'],
-                'posture': sensor_data['ultrasonic_sensor']['posture']
-            }
-            self.mqtt_client.publish(
-                TOPICS['ultrasonic'],
-                json.dumps(ultrasonic_payload),
-                qos=1
-            )
-            distance = ultrasonic_payload['distance']
-            if distance > 0:
-                print(f"📏 Distance: {distance}cm - Posture: {ultrasonic_payload['posture']}")
 
         except json.JSONDecodeError as e:
             print(f"✗ JSON decode error: {e}")

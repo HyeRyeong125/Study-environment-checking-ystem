@@ -278,16 +278,18 @@
             display: flex;
             align-items: flex-end;
             justify-content: space-around;
-            height: 150px;
+            height: 180px;
             gap: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 40px;
+            position: relative;
         }
 
         .chart-bar-group {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
             flex: 1;
         }
 
@@ -308,12 +310,16 @@
             font-size: 0.8rem;
             font-weight: 700;
             color: #2c3e50;
+            position: absolute;
+            bottom: 0;
+            white-space: nowrap;
         }
 
         .chart-label {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: #95a5a6;
             text-align: center;
+            margin-top: 8px;
         }
 
         /* Responsive */
@@ -361,7 +367,6 @@
             <ul class="nav-menu">
                 <li><a href="dashboard.html">대시보드</a></li>
                 <li><a href="stats.html" class="active">통계</a></li>
-                <li><a href="settings.html">설정</a></li>
             </ul>
         </div>
     </nav>
