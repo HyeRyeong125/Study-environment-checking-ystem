@@ -39,7 +39,7 @@
             background: var(--bg);
             height: auto;
             box-sizing: border-box;
-            padding: 20px;
+            padding: 40px;
         }
 
         /* ---------- 타이포그래피 ---------- */
@@ -53,28 +53,29 @@
         }
 
         .reveal h2 {
-            font-size: 1.5em;
+            font-size: 1.8em;
             font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 0.7em;
-            line-height: 1.2;
+            color: #1a1a1a;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
         }
 
         /* 슬라이드 제목 위 강조 바 */
         .slide-kicker {
             display: inline-block;
-            font-size: 0.55em;
+            font-size: 0.75em;
             font-weight: 700;
-            letter-spacing: 0.12em;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 0.4em;
+            color: var(--primary);
+            margin-bottom: 0.6em;
         }
 
         .reveal p, .reveal li {
-            font-size: 0.85em;
-            line-height: 1.55;
-            color: var(--text);
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #1a1a1a;
+            font-weight: 500;
         }
 
         .reveal strong { color: var(--text); font-weight: 700; }
@@ -117,25 +118,25 @@
 
         /* ---------- 카드 / 박스 ---------- */
         .card {
-            background: var(--primary-bg);
-            border: 1px solid var(--border);
+            background: transparent;
+            border: 1px solid #ddd;
             border-left: 4px solid var(--primary);
             border-radius: 10px;
-            padding: 0.7em 1em;
-            margin: 0.45em 0;
+            padding: 1em 1.2em;
+            margin: 0.8em 0;
         }
         .card.accent-card {
-            background: var(--accent-bg);
+            background: transparent;
             border-left-color: var(--accent);
         }
         .card h4 {
-            font-size: 0.82em;
-            color: var(--primary);
-            margin-bottom: 0.2em;
+            font-size: 1em;
+            color: #1a1a1a;
+            margin-bottom: 0.4em;
             font-weight: 700;
         }
-        .card.accent-card h4 { color: var(--accent); }
-        .card p { margin: 0.15em 0 0; color: var(--text-muted); font-size: 0.72em; }
+        .card.accent-card h4 { color: #1a1a1a; }
+        .card p { margin: 0.3em 0 0; color: #333; font-size: 0.95em; font-weight: 500; }
 
         /* ---------- 그리드 ---------- */
         .grid {
@@ -147,44 +148,45 @@
         .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
 
         .tile {
-            background: var(--bg);
-            border: 1px solid var(--border);
+            background: transparent;
+            border: 1px solid #ddd;
             border-radius: 10px;
-            padding: 0.8em 0.9em;
+            padding: 1em 1.1em;
             transition: none;
         }
-        .tile .ico { font-size: 1.4em; display: block; margin-bottom: 0.2em; }
-        .tile h4 { font-size: 0.82em; color: var(--primary); margin-bottom: 0.2em; font-weight: 700; }
-        .tile p { margin: 0; font-size: 0.7em; color: var(--text-muted); line-height: 1.4; }
+        .tile .ico { font-size: 1.6em; display: block; margin-bottom: 0.3em; }
+        .tile h4 { font-size: 0.95em; color: #1a1a1a; margin-bottom: 0.3em; font-weight: 700; }
+        .tile p { margin: 0; font-size: 0.88em; color: #333; line-height: 1.6; font-weight: 500; }
 
         /* ---------- 깔끔한 리스트 ---------- */
-        ul.clean { list-style: none; padding: 0; margin: 0.3em 0; }
+        ul.clean { list-style: none; padding: 0; margin: 0.5em 0; }
         ul.clean li {
             position: relative;
-            padding-left: 1.4em;
-            margin: 0.55em 0;
-            font-size: 0.82em;
+            padding-left: 1.8em;
+            margin: 0.8em 0;
+            font-size: 1em;
+            font-weight: 500;
+            color: #1a1a1a;
         }
         ul.clean li::before {
-            content: "";
+            content: "●";
             position: absolute;
-            left: 0; top: 0.5em;
-            width: 8px; height: 8px;
-            border-radius: 2px;
-            background: var(--accent);
+            left: 0; top: 0;
+            font-size: 0.6em;
+            color: var(--primary);
         }
 
         /* ---------- 기술 스택 ---------- */
         .stack-cat {
-            background: var(--bg);
-            border: 1px solid var(--border);
+            background: transparent;
+            border: 1px solid #ddd;
             border-top: 3px solid var(--primary);
             border-radius: 8px;
-            padding: 0.7em 0.85em;
+            padding: 0.9em 1em;
         }
-        .stack-cat h4 { font-size: 0.8em; color: var(--primary); margin-bottom: 0.35em; }
+        .stack-cat h4 { font-size: 0.95em; color: #1a1a1a; margin-bottom: 0.5em; font-weight: 700; }
         .stack-cat ul { list-style: none; padding: 0; margin: 0; }
-        .stack-cat li { font-size: 0.7em; color: var(--text); margin: 0.22em 0; }
+        .stack-cat li { font-size: 0.88em; color: #333; margin: 0.35em 0; font-weight: 500; }
 
         /* ---------- 아키텍처 다이어그램 ---------- */
         .arch { max-width: 560px; margin: 0.3em auto; }
